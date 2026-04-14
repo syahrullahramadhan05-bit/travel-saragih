@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beranda — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  
+/* HERO */
+.hero { min-height:100vh; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:80px; }
+.hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200') center/cover; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,.6) 50%, rgba(10,10,10,.3) 100%); }
+.hero-nav { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:24px 80px; z-index:5; }
+.hero-nav .brand { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:var(--orange); }
+.hero-nav .links { display:flex; gap:28px; }
+.hero-nav .links a { font-size:13px; color:#bbb; letter-spacing:.08em; text-transform:uppercase; transition:color .2s; cursor:pointer; }
+.hero-nav .links a:hover { color:var(--orange); }
+.hero-content { position:relative; z-index:2; padding:0 80px; }
+.hero-tag { font-size:11px; letter-spacing:.15em; color:var(--orange); text-transform:uppercase; margin-bottom:20px; }
+.hero-title { font-size:72px; font-weight:800; line-height:1.0; margin-bottom:20px; max-width:700px; }
+.hero-desc { font-size:14px; color:#aaa; max-width:380px; line-height:1.7; margin-bottom:40px; }
+.search-bar { display:flex; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; max-width:700px; }
+.search-field { flex:1; padding:20px; border-right:1px solid var(--border); min-width:0; }
+.search-field label { font-size:10px; letter-spacing:.1em; color:var(--orange); text-transform:uppercase; display:block; margin-bottom:6px; }
+.search-field input, .search-field select { background:none; border:none; outline:none; color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px; width:100%; }
+.search-field select option { background:var(--bg3); }
+.search-btn { padding: 31px; background:var(--orange); border:none; cursor:pointer; color:#fff; font-size:14px; font-family:'DM Sans',sans-serif; font-weight:600; display:flex; align-items:center; gap:8px; white-space:nowrap; transition:background .2s; }
+.search-btn:hover { background:var(--orange-light); }
+
+/* SECTIONS */
+.section { padding:80px 80px; }
+.section-header { margin-bottom:48px; }
+.section-header h2 { font-size:42px; font-weight:700; margin-bottom:8px; }
+.section-header h2 span { color:var(--orange); }
+.section-header p { color:var(--gray); font-size:14px; max-width:400px; }
+.section-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:48px; }
+.nav-arrow { width:40px; height:40px; border-radius:50%; background:var(--bg3); border:1px solid var(--border); color:var(--white); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; transition:all .2s; }
+.nav-arrow:hover { background:var(--orange); border-color:var(--orange); }
+.section-nav { display:flex; gap:12px; }
+
+/* FEATURE CARDS */
+.features-split { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.feat-car-img { position:relative; }
+.feat-car-img img { width:100%; border-radius:var(--radius-lg); object-fit:cover; height:400px; }
+.feature-grid { display:grid; grid-template-columns:200px 1fr; gap:16px; max-width:600px; }
+.feat-img-card { border-radius:var(--radius-lg); overflow:hidden; position:relative; }
+.feat-img-card img { width:100%; height:260px; object-fit:cover; display:block; }
+.offer-badge { position:absolute; top:12px; left:12px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; letter-spacing:.08em; padding:4px 10px; border-radius:50px; text-transform:uppercase; }
+.img-caption { position:absolute; bottom:0; left:0; right:0; padding:16px; background:linear-gradient(to top, rgba(0,0,0,.8), transparent); font-size:12px; color:#ddd; }
+.feat-info-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; display:flex; flex-direction:column; }
+.shield-icon { width:36px; height:36px; background:var(--bg4); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:16px; }
+.feat-info-card h3 { font-size:22px; font-weight:700; margin-bottom:12px; line-height:1.2; }
+.feat-info-card p { font-size:13px; color:var(--gray); line-height:1.6; flex:1; margin-bottom:16px; }
+.feat-tags { display:flex; gap:8px; flex-wrap:wrap; }
+.feat-tag { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--gray); }
+.feat-tag::before { content:'✓'; color:var(--orange); }
+.shield-3d { width:80px; height:80px; margin-top:auto; align-self:flex-end; background:linear-gradient(135deg, #c8860a, #8b5e0a); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:40px; }
+
+/* ROUTES */
+.routes-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; border-radius:var(--radius-lg); overflow:hidden; }
+.route-card { position:relative; overflow:hidden; cursor:pointer; }
+.route-card img { width:100%; height:260px; object-fit:cover; display:block; transition:transform .4s; }
+.route-card:hover img { transform:scale(1.05); }
+.route-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.75) 30%, transparent 100%); }
+.route-card.big img { height:522px; }
+.route-name { position:absolute; bottom:20px; left:20px; font-family:'Syne',sans-serif; font-size:20px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.route-small { display:flex; flex-direction:column; gap:4px; }
+
+/* FEATURES */
+.features-split { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.feat-car-img { position:relative; }
+.feat-car-img img { width:100%; border-radius:var(--radius-lg); object-fit:cover; height:400px; }
+.satisfaction-badge { position:absolute; bottom:20px; right:20px; background:var(--card); border:1px solid var(--border); border-radius:50px; padding:10px 18px; display:flex; align-items:center; gap:10px; font-size:13px; }
+.satisfaction-badge strong { color:var(--orange); font-size:20px; }
+.features-list { display:flex; flex-direction:column; gap:28px; }
+.feature-item { display:flex; gap:16px; }
+.feat-icon-wrap { width:44px; height:44px; flex-shrink:0; background:var(--orange-dim); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--orange); }
+.feature-item h4 { font-size:15px; font-weight:600; margin-bottom:6px; }
+.feature-item p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+/* HOME FOOTER */
+.home-footer { border-top:1px solid var(--border); padding:48px 80px; display:grid; grid-template-columns:280px 1fr 1fr 1fr; gap:40px; }
+.brand-name { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:var(--orange); margin-bottom:10px; }
+.home-footer p { font-size:13px; color:var(--gray); line-height:1.6; }
+.link-col h5 { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); margin-bottom:16px; }
+.link-col a { display:block; font-size:13px; color:var(--gray); margin-bottom:10px; transition:color .2s; cursor:pointer; }
+.link-col a:hover { color:var(--white); }
+.home-footer-bottom { padding:16px 80px; border-top:1px solid var(--border); font-size:11px; color:var(--gray2); text-align:center; letter-spacing:.08em; text-transform:uppercase; }
+
+@media(max-width:900px) {
+  .hero-nav { padding:20px 24px; }
+  .hero-content { padding:0 24px; }
+  .hero-title { font-size:40px; }
+  .section { padding:60px 24px; }
+  .features-split { grid-template-columns:1fr; }
+  .home-footer { grid-template-columns:1fr 1fr; padding:40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO + NAV -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-nav">
+    <div class="brand">Travel Saragih</div>
+    <div class="links">
+      <a href="home.html">Destinasi</a>
+      <a href="results.html">Armada</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="profile.html">Profil</a>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Travel Saragih Premium</div>
+    <h1 class="hero-title">Rasakan<br>Transportasi<br>Premium<br>Kenyamanan.</h1>
+    <p class="hero-desc">Mendefinisikan ulang logistik mewah di seluruh Indonesia. Layanan concierge pribadi kami memastikan setiap mil perjalanan Anda semewah tujuan Anda.</p>
+    <div class="search-bar">
+      <div class="search-field">
+        <label>Asal</label>
+        <select id="selectAsal"><option>Pekanbaru</option><option>Padang</option><option>Medan</option><option>Bukittinggi</option><option>Jakarta</option><option>Surabaya</option></select>
+      </div>
+      <div class="search-field">
+        <label>Tujuan</label>
+        <select id="selectTujuan"><option>Bukittinggi</option><option>Padang</option><option>Medan</option><option>Pekanbaru</option><option>Bandung</option><option>Yogyakarta</option></select>
+      </div>
+      <div class="search-field">
+        <label>Tanggal</label>
+        <input type="date" id="tanggalInput" value="2026-10-24">
+      </div>
+      <div>
+        <button class="search-btn" onclick="cariRute()">Cari</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXCLUSIVITY -->
+<div class="section">
+  <div class="section-top">
+    <div class="section-header">
+      <h2>Eksklusivitas <span>LuxeTravel</span></h2>
+      <p>Layanan jemputan eksklusif dengan standar kenyamanan hotel bintang untuk perjalanan antar kota Anda.</p>
+    </div>
+    <div class="section-nav">
+    </div>
+  </div>
+  <div class="feature-grid">
+    <div class="feat-img-card">
+      <img src="foto/kabin alba.jpg" alt="VIP Car">
+      <div class="offer-badge">Offer</div>
+      <div class="img-caption">First Class Weekend<br><small style="color:#aaa">Tersedia untuk perjalanan akhir pekan</small></div>
+    </div>
+    <div class="feat-info-card">
+      <div class="shield-icon">🛡</div>
+      <h3>Perjalanan Aman,<br>Hati Tenang.</h3>
+      <p>Setiap perjalanan dengan LuxeTravel kini dilengkapi dengan asuransi perjalanan premium. Kami menjamin keamanan Anda dan keluarga hingga tujuan akhir tanpa biaya tambahan.</p>
+      <div class="feat-tags">
+        <span class="feat-tag">Proteksi Medis</span>
+        <span class="feat-tag">Ganti Rugi</span>
+        <span class="feat-tag">Layanan 24/7</span>
+      </div>
+      <div class="shield-3d">🏆</div>
+    </div>
+  </div>
+</div>
+
+<!-- POPULAR ROUTES -->
+<div class="section" style="padding-top:0;">
+  <div class="section-header"><h2>Rute Populer</h2></div>
+  <div class="routes-grid">
+    <a class="route-card big">
+      <img src="foto/Fort de Kock.jpg" alt="Bukittinggi">
+      <div class="route-overlay"></div>
+      <div class="route-name">Bukittinggi</div>
+    </a>
+    <div class="route-small">
+      <a class="route-card">
+        <img src="foto/alahan.jpg.jpeg" alt="Alahan Panjang">
+        <div class="route-overlay"></div>
+        <div class="route-name" style="font-size:16px;">Alahan Panjang</div>
+      </a>
+      <a class="route-card">
+        <img src="foto/Grand Mosque of West Sumatra, Padang City,  Indonesia_.jpg" alt="Padang">
+        <div class="route-overlay"></div>
+        <div class="route-name" style="font-size:16px;">Padang</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section" style="padding-top:0;">
+  <div class="features-split">
+    <div class="feat-car-img">
+      <img src="foto/Rebon zihad.jpg" alt="Premium Car">
+      <div class="satisfaction-badge"><strong>99%</strong><span style="font-size:12px;color:var(--gray);">Guest Satisfaction</span>👍</div>
+    </div>
+    <div>
+      <div class="section-header">
+        <h2>Standar Baru Dalam<br><span>Perjalanan Darat</span></h2>
+      </div>
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feat-icon-wrap">🪑</div>
+          <div><h4>Kursi Kapten Premium</h4><p>Kenyamanan dengan ruang kaki yang luas dan fitur pijat elektrik di setiap armada.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feat-icon-wrap">📶</div>
+          <div><h4>Konektivitas Tanpa Batas</h4><p>Dilengkapi dengan Wi-Fi 5G super cepat dan port pengisian daya kabel di setiap tempat duduk.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feat-icon-wrap">☕</div>
+          <div><h4>Refreshment Eksklusif</h4><p>Pilihan snack gourmet dan minuman dingin yang selalu tersedia untuk menyempurnakan perjalanan Anda.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="home-footer">
+  <div><div class="brand-name">LUXETRAVEL</div><p>Penyedia layanan transportasi premium dengan fokus pada kenyamanan dan privasi penumpang.</p></div>
+  <div class="link-col"><h5>Tautan Cepat</h5><a href="home.html">Destinasi</a><a href="results.html">Armada</a><a href="#">Layanan</a></div>
+  <div class="link-col"><h5>Legal</h5><a href="#">Syarat &amp; Ketentuan</a><a href="#">Kebijakan Privasi</a><a href="#">Portal Admin</a></div>
+  <div class="link-col"><h5>Hubungi</h5><a href="#">WhatsApp</a><a href="#">Email</a><a href="#">Call Center</a></div>
+</div>
+<div class="home-footer-bottom">© 2024 LuxeTravel Private Concierge. All Rights Reserved.</div>
+
+<script>
+function cariRute() {
+  const asal = document.getElementById('selectAsal').value;
+  const tujuan = document.getElementById('selectTujuan').value;
+  const tanggal = document.getElementById('tanggalInput').value;
+
+  const params = new URLSearchParams({ asal, tujuan, tanggal });
+  window.location.href = 'results.html?' + params.toString();
+}
+
+function pilihRute(asal, tujuan) {
+  const tanggal = document.getElementById('tanggalInput')?.value || '2026-10-24';
+  const params = new URLSearchParams({ asal, tujuan, tanggal });
+  window.location.href = 'results.html?' + params.toString();
+}
+
+// Set default date
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const dd = String(today.getDate() + 7).padStart(2, '0');
+if (document.getElementById('tanggalInput') && !document.getElementById('tanggalInput').value) {
+  document.getElementById('tanggalInput').value = `${yyyy}-${mm}-${dd}`;
+}
+
+// Proteksi halaman home - cek login
+function checkAuth() {
+    const currentUser = localStorage.getItem('travel_current_user');
+    const publicPages = ['login.html', 'register.html'];
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if (!currentUser && !publicPages.includes(currentPage)) {
+        window.location.href = 'login.html';
+        return false;
+    }
+    
+    // Tampilkan nama user di navbar jika ada
+    if (currentUser) {
+        const user = JSON.parse(currentUser);
+        const userIcon = document.querySelector('.nav-icons button:last-child');
+        if (userIcon) {
+            userIcon.title = user.nama;
+        }
+    }
+    return true;
+}
+
+checkAuth();
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilih Kursi — Toyota Reborn | Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.seat-back { padding:20px 80px; display:flex; align-items:center; gap:10px; font-size:13px; color:var(--orange); cursor:pointer; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid var(--border); }
+.seat-back:hover { opacity:.8; }
+.seat-layout { display:grid; grid-template-columns:360px 1fr; gap:24px; padding:32px 80px; padding-bottom:140px; }
+.seat-info-panel h1 { font-size:36px; font-weight:800; margin-bottom:8px; }
+.seat-info-panel p { font-size:13px; color:var(--gray); line-height:1.6; margin-bottom:32px; }
+.panel-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px; }
+.fleet-row { display:flex; align-items:center; gap:16px; }
+.fleet-icon { width:48px; height:48px; background:var(--bg4); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.fleet-row h4 { font-size:16px; font-weight:600; }
+.fleet-row p { font-size:12px; color:var(--gray); margin-top:2px; }
+.panel-label { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray); margin-bottom:16px; font-weight:500; }
+.legend-items { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.legend-item { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--gray); }
+.legend-dot { width:20px; height:20px; border-radius:6px; flex-shrink:0; }
+.legend-dot.available { background:var(--bg4); border:1px solid var(--border); }
+.legend-dot.selected { background:var(--orange); }
+.legend-dot.taken { background:var(--bg2); border:1px solid var(--border); }
+
+/* SEAT MAP - Reborn Layout (2-2-3 configuration) */
+.seat-map-panel { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; }
+.cabin-label { text-align:center; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--gray); background:var(--bg4); border-radius:var(--radius); padding:12px; margin-bottom:28px; border:1px solid var(--border); }
+.seat-rows { display:flex; flex-direction:column; gap:14px; }
+.seat-row { display:flex; justify-content:center; gap:12px; align-items:center; flex-wrap:wrap; }
+.seat-btn { width:56px; height:56px; border-radius:12px; border:1px solid var(--border); background:var(--bg4); color:var(--gray); cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:all .2s; font-size:18px; }
+.seat-num { font-size:10px; letter-spacing:.04em; }
+.seat-btn:hover:not(.taken):not(.driver) { border-color:var(--orange); color:var(--orange); transform:scale(1.05); }
+.seat-btn.selected { background:var(--orange); border-color:var(--orange); color:#fff; }
+.seat-btn.taken { background:var(--bg2); opacity:.4; cursor:not-allowed; }
+.seat-btn.driver { background:var(--blue); border-color:var(--blue); color:#fff; cursor:default; }
+.seat-gap { width:56px; }
+.baggage-bar { text-align:center; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); padding:14px; margin-top:28px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gray); }
+.seat-aisle { width:20px; }
+
+/* STICKY BOTTOM */
+.sticky-bottom { position:fixed; bottom:0; left:0; right:0; background:rgba(14,14,14,.97); backdrop-filter:blur(12px); border-top:1px solid var(--border); padding:20px 80px; display:flex; align-items:center; gap:32px; z-index:100; }
+.info-label { font-size:10px; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+.seat-pill { background:var(--bg3); border:1px solid var(--border); border-radius:50px; padding:6px 14px; font-size:13px; color:var(--orange); font-weight:600; }
+.price-val { font-family:'Syne',sans-serif; font-size:24px; font-weight:700; color:var(--orange); }
+.bottom-actions { margin-left:auto; display:flex; gap:12px; }
+
+@media(max-width:768px) {
+  .seat-layout { grid-template-columns:1fr; padding:20px; }
+  .seat-back { padding:16px 20px; }
+  .sticky-bottom { padding:16px 20px; flex-wrap:wrap; gap:16px; }
+  .seat-row { justify-content:center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">Saragih Premium</div>
+  <div class="nav-icons">
+    <button title="Profil" onclick="location.href='profile.html'">👤</button>
+  </div>
+</nav>
+
+<a href="home.html" class="seat-back">← Kembali ke Destinasi</a>
+
+<div class="seat-layout">
+  <!-- LEFT PANEL -->
+  <div class="seat-info-panel">
+    <h1>Pilih Kursi Reborn</h1>
+    <p>Silakan tentukan posisi duduk terbaik untuk perjalanan premium Anda bersama Travel Saragih Reguler.</p>
+
+    <div class="panel-card">
+      <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">Detail Armada</div>
+      <div class="fleet-row">
+        <div class="fleet-icon">🚐</div>
+        <div>
+          <h4 id="armadaName">Toyota Reborn</h4>
+          <p id="armadaClass">Premium • 7 Kursi</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="panel-card">
+      <div class="panel-label">Fasilitas</div>
+      <div class="legend-items">
+        <div class="legend-item"><div class="legend-dot" style="background:transparent; border:none;">🔌</div> USB Port</div>
+        <div class="legend-item"><div class="legend-dot" style="background:transparent; border:none;">🪑</div> Kursi Nyaman</div>
+        <div class="legend-item"><div class="legend-dot" style="background:transparent; border:none;">💨</div> AC Dingin</div>
+        <div class="legend-item"><div class="legend-dot" style="background:transparent; border:none;">📺</div> TV Monitor</div>
+      </div>
+    </div> -->
+
+    <div class="panel-card">
+      <div class="panel-label">Legenda</div>
+      <div class="legend-items">
+        <div class="legend-item"><div class="legend-dot available"></div> Tersedia</div>
+        <div class="legend-item"><div class="legend-dot selected"></div> Dipilih</div>
+        <div class="legend-item"><div class="legend-dot taken"></div> Terisi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEAT MAP - Reborn Layout -->
+  <div class="seat-map-panel">
+    <div class="cabin-label">Bagasi Depan</div>
+    <div class="seat-rows">
+      <!-- Baris 1: Kursi depan + Driver -->
+      <div class="seat-row">
+        <div class="seat-btn" onclick="selectSeat(this,'1A')">🪑<div class="seat-num">1A</div></div>
+        <div class="seat-gap"></div>
+        <div class="seat-btn driver">🚗<div class="seat-num">Driver</div></div>
+      </div>
+      
+      <!-- Baris 2: 3 kursi -->
+      <div class="seat-row">
+        <div class="seat-btn" onclick="selectSeat(this,'2A')">🪑<div class="seat-num">2A</div></div>
+        <div class="seat-btn" onclick="selectSeat(this,'2B')">🪑<div class="seat-num">2B</div></div>
+        <div class="seat-btn" onclick="selectSeat(this,'2C')">🪑<div class="seat-num">2C</div></div>
+      </div>
+      
+      <!-- Baris 3: 3 kursi -->
+      <div class="seat-row">
+        <div class="seat-btn taken" onclick="selectSeat(this,'3A')">🪑<div class="seat-num">3A</div></div>
+        <div class="seat-btn selected" onclick="selectSeat(this,'3B')">🪑<div class="seat-num">3B</div></div>
+        <div class="seat-btn" onclick="selectSeat(this,'3C')">🪑<div class="seat-num">3C</div></div>
+      </div>
+    
+      <div class="seat-row">
+      </div>
+    </div>
+    <div class="baggage-bar">🚗 Bagasi Belakang</div>
+  </div>
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="sticky-bottom">
+  <div>
+    <div class="info-label">Kursi Dipilih</div>
+    <span class="seat-pill" id="seatDisplay">Kursi 3B</span>
+  </div>
+  <div>
+    <div class="info-label">1 Penumpang</div>
+  </div>
+  <div>
+    <div class="info-label">Total Harga</div>
+    <div class="price-val" id="totalPrice">Rp 135.000</div>
+  </div>
+  <div class="bottom-actions">
+    <a href="results.html"><button class="btn btn-outline">Ganti Armada</button></a>
+    <button class="btn btn-orange btn-lg" onclick="konfirmasiPilihan()">Konfirmasi Pilihan ›</button>
+  </div>
+</div>
+
+<script>
+let selectedSeat = '3B';
+let hargaTotal = 135000;
+
+// Ambil data dari URL atau localStorage
+const urlParams = new URLSearchParams(window.location.search);
+const hargaDariURL = urlParams.get('harga');
+const kelasDariURL = urlParams.get('kelas');
+const armadaDariURL = urlParams.get('armada');
+
+if (hargaDariURL) {
+  hargaTotal = parseInt(hargaDariURL);
+  document.getElementById('totalPrice').textContent = 'Rp ' + hargaTotal.toLocaleString('id-ID');
+  localStorage.setItem('travel_harga', hargaTotal);
+}
+
+if (kelasDariURL) {
+  localStorage.setItem('travel_kelas', kelasDariURL);
+  document.getElementById('armadaClass').innerHTML = kelasDariURL + ' • 7 Kursi';
+}
+
+if (armadaDariURL) {
+  localStorage.setItem('travel_nama_armada', armadaDariURL);
+  document.getElementById('armadaName').textContent = armadaDariURL;
+}
+
+// Ambil asal, tujuan, tanggal dari localStorage
+const asal = localStorage.getItem('travel_asal') || 'Pekanbaru';
+const tujuan = localStorage.getItem('travel_tujuan') || 'Bukittinggi';
+const tanggal = localStorage.getItem('travel_tanggal') || '';
+
+function selectSeat(btn, id) {
+  if (btn.classList.contains('taken') || btn.classList.contains('driver')) return;
+  document.querySelectorAll('.seat-btn.selected').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSeat = id;
+  document.getElementById('seatDisplay').textContent = 'Kursi ' + id;
+}
+
+function konfirmasiPilihan() {
+  // Simpan semua data ke localStorage untuk dibawa ke payment
+  localStorage.setItem('travel_kursi', selectedSeat);
+  localStorage.setItem('travel_harga', hargaTotal);
+  localStorage.setItem('travel_penumpang', '1');
+  localStorage.setItem('travel_waktu_berangkat', '09:00');
+  localStorage.setItem('travel_waktu_tiba', '12:15');
+  localStorage.setItem('travel_kelas_armada', localStorage.getItem('travel_kelas') || 'PREMIUM');
+  
+  // Generate Booking ID
+  const bookingId = 'SRG-REB-' + new Date().getFullYear() + 
+    String(new Date().getMonth() + 1).padStart(2,'0') + 
+    String(new Date().getDate()).padStart(2,'0') + 
+    '-' + Math.floor(Math.random() * 1000);
+  localStorage.setItem('travel_booking_id', bookingId);
+  
+  window.location.href = 'payment.html';
+}
+
+// Load data dari localStorage jika ada
+const savedSeat = localStorage.getItem('travel_kursi');
+if (savedSeat && savedSeat.includes('REB') === false) {
+  const seatBtns = document.querySelectorAll('.seat-btn');
+  for (let btn of seatBtns) {
+    const seatNum = btn.querySelector('.seat-num');
+    if (seatNum && seatNum.textContent === savedSeat) {
+      if (!btn.classList.contains('taken')) {
+        document.querySelectorAll('.seat-btn.selected').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedSeat = savedSeat;
+        document.getElementById('seatDisplay').textContent = 'Kursi ' + savedSeat;
+      }
+      break;
+    }
+  }
+}
+</script>
+</body>
+</html>

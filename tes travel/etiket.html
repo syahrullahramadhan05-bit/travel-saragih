@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>E-Ticket — Travel Saragih Premium</title>
+<link rel="stylesheet" href="style.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0c10 0%, #14181f 100%);
+    font-family: 'DM Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* Global Variables */
+:root {
+    --orange: #f59e0b;
+    --orange-light: #fbbf24;
+    --orange-dim: rgba(245, 158, 11, 0.15);
+    --bg2: #1a1f2a;
+    --bg3: #1e2430;
+    --bg4: #252c38;
+    --border: #2a303e;
+    --gray: #8a99b0;
+    --gray2: #6b7a8f;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --green: #10b981;
+    --green-dim: rgba(16, 185, 129, 0.15);
+}
+
+/* Navigation */
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 12, 16, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-logo {
+    font-family: 'Syne', 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: -0.5px;
+}
+
+/* .nav-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-icons button {
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+    color: var(--gray);
+} */
+
+/* .nav-icons button:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+} */
+
+/* Main Container */
+.eticket-container {
+    max-width: 900px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+/* Success Header */
+.success-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--green-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border: 2px solid var(--green);
+}
+
+.success-icon span {
+    font-size: 48px;
+}
+
+.success-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--green);
+    margin-bottom: 8px;
+}
+
+.success-header p {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+/* E-Ticket Card */
+.eticket-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+}
+
+/* Ticket Header */
+.ticket-header {
+    background: linear-gradient(135deg, var(--orange), #ea580c);
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.ticket-header-left h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1a1f2a;
+    margin-bottom: 4px;
+}
+
+.ticket-header-left p {
+    font-size: 11px;
+    color: #1a1f2a;
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+}
+
+.ticket-header-right {
+    text-align: right;
+}
+
+.ticket-header-right .status-badge {
+    background: #1a1f2a;
+    color: var(--orange);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Ticket Body */
+.ticket-body {
+    padding: 32px;
+}
+
+/* Route Section */
+.route-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.route-point {
+    flex: 1;
+    text-align: center;
+}
+
+.route-point .label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.route-point .city {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+}
+
+.route-point .time {
+    font-size: 14px;
+    color: var(--orange);
+    font-weight: 600;
+}
+
+.route-arrow {
+    font-size: 32px;
+    color: var(--orange);
+    opacity: 0.7;
+}
+
+/* Divider with dots */
+.ticket-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 24px 0;
+    color: var(--gray2);
+    font-size: 12px;
+}
+
+.ticket-divider::before,
+.ticket-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--border), var(--border) 8px, transparent 8px, transparent 16px);
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.info-item {
+    background: var(--bg4);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+}
+
+.info-item .info-label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.info-item .info-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.info-item .info-sub {
+    font-size: 12px;
+    color: var(--gray2);
+    margin-top: 4px;
+}
+
+.info-item.highlight {
+    border-color: var(--orange);
+    background: var(--orange-dim);
+}
+
+.info-item.highlight .info-value {
+    color: var(--orange);
+}
+
+/* Seat Highlight */
+.seat-highlight {
+    text-align: center;
+    background: var(--bg4);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 32px;
+    border: 2px solid var(--orange);
+}
+
+.seat-highlight .label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.seat-highlight .seat-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--orange);
+    font-family: monospace;
+    letter-spacing: 4px;
+}
+
+/* Barcode Section */
+.barcode-section {
+    text-align: center;
+    padding: 24px;
+    background: var(--bg4);
+    border-radius: 16px;
+    margin-top: 16px;
+    border: 1px solid var(--border);
+}
+
+.barcode {
+    font-family: 'Courier New', monospace;
+    font-size: 48px;
+    letter-spacing: 4px;
+    color: var(--white);
+    margin-bottom: 12px;
+    word-break: break-all;
+}
+
+.barcode-section p {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--orange), #ea580c);
+    color: #1a1f2a;
+}
+
+.btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--white);
+}
+
+.btn-outline:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: var(--orange-dim);
+}
+
+/* Footer Note */
+.footer-note {
+    text-align: center;
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--bg3);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.footer-note p {
+    font-size: 11px;
+    color: var(--gray2);
+    line-height: 1.6;
+}
+
+.footer-note .important {
+    color: var(--orange);
+    font-weight: 600;
+}
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #1a1f2a;
+    padding: 14px 28px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .topnav {
+        padding: 16px 24px;
+    }
+    
+    .eticket-container {
+        margin: 24px auto;
+    }
+    
+    .ticket-header {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ticket-header-right {
+        text-align: center;
+    }
+    
+    .ticket-body {
+        padding: 24px;
+    }
+    
+    .route-section {
+        flex-direction: column;
+    }
+    
+    .route-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        justify-content: center;
+    }
+    
+    .barcode {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+    
+    .toast-message {
+        white-space: normal;
+        text-align: center;
+        max-width: 90%;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .topnav,
+    .action-buttons,
+    .footer-note {
+        display: none;
+    }
+    
+    .eticket-container {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .eticket-card {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+    
+    .ticket-header {
+        background: #f59e0b;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .info-item,
+    .seat-highlight,
+    .barcode-section {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+    <div class="nav-logo">Saragih Premium</div>
+    <div class="nav-icons">
+        <button title="Profil" onclick="location.href='profile.html'">👤</button>
+    </div>
+</nav>
+
+<div class="eticket-container">
+    <!-- Success Header -->
+    <div class="success-header">
+        <div class="success-icon">
+            <span>✓</span>
+        </div>
+        <h1>Pembayaran Berhasil!</h1>
+        <p>Terima kasih telah memesan perjalanan bersama Travel Saragih Premium</p>
+    </div>
+
+    <!-- E-Ticket Card -->
+    <div class="eticket-card">
+        <div class="ticket-header">
+            <div class="ticket-header-left">
+                <h2>E-TICKET</h2>
+                <p>BOARDING PASS</p>
+            </div>
+            <div class="ticket-header-right">
+                <div class="status-badge" id="statusBadge">✓ KONFIRMASI</div>
+            </div>
+        </div>
+
+        <div class="ticket-body">
+            <!-- Route Section -->
+            <div class="route-section">
+                <div class="route-point">
+                    <div class="label">KOTA ASAL</div>
+                    <div class="city" id="asalDisplay">Pekanbaru</div>
+                    <div class="time" id="waktuBerangkatDisplay">07:30 WIB</div>
+                </div>
+                <div class="route-arrow">→</div>
+                <div class="route-point">
+                    <div class="label">KOTA TUJUAN</div>
+                    <div class="city" id="tujuanDisplay">Bukittinggi</div>
+                    <div class="time" id="waktuTibaDisplay">10:45 WIB</div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="ticket-divider"></div>
+
+            <!-- Info Grid -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">TANGGAL PERJALANAN</div>
+                    <div class="info-value" id="tanggalDisplay">20 Januari 2026</div>
+                    <div class="info-sub">Check-in 1 jam sebelum keberangkatan</div>
+                </div>
+                <div class="info-item highlight">
+                    <div class="info-label">NOMOR KURSI</div>
+                    <div class="info-value" id="kursiDisplay">01A</div>
+                    <div class="info-sub">Kelas Eksekutif</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">ARMADA</div>
+                    <div class="info-value" id="armadaDisplay">Toyota Hiace</div>
+                    <div class="info-sub" id="kelasDisplay">VIP CLASS</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">INVOICE ID</div>
+                    <div class="info-value" id="invoiceDisplay">#PT-2222</div>
+                    <div class="info-sub">Simpan sebagai bukti pembayaran</div>
+                </div>
+            </div>
+
+            <!-- Seat Highlight -->
+            <div class="seat-highlight">
+                <div class="label">KURSI ANDA</div>
+                <div class="seat-number" id="seatNumberDisplay">01A</div>
+                <div class="info-sub" style="margin-top: 8px;">Baris Depan • Jendela</div>
+            </div>
+
+            <!-- Barcode Section -->
+            <div class="barcode-section">
+                <div class="barcode" id="barcodeDisplay">||||||||||||||||||||</div>
+                <p>Scan barcode ini saat check-in</p>
+                <p style="margin-top: 8px; font-size: 9px;" id="bookingCodeDisplay">KODE BOOKING: SRG-20260120-001</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn btn-outline" onclick="downloadTicket()">
+            📥 Download E-Ticket
+        </button>
+        <button class="btn btn-outline" onclick="window.print()">
+            🖨️ Cetak Tiket
+        </button>
+        <button class="btn btn-primary" onclick="location.href='home.html'">
+            🏠 Kembali ke Beranda
+        </button>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+        <p>
+            <span class="important">⚠️ Perhatian:</span> Harap tunjukkan e-ticket ini (digital atau cetak) kepada petugas saat check-in.<br>
+            Check-in dibuka 60 menit sebelum keberangkatan dan ditutup 15 menit sebelum jadwal.<br>
+            Pastikan membawa identitas diri (KTP/SIM/Paspor) yang valid.
+        </p>
+    </div>
+</div>
+
+<div id="toastMsg" class="toast-message"></div>
+
+<script>
+    // Data booking dari localStorage (dari payment.html)
+    let ticketData = {
+        asal: "Pekanbaru",
+        tujuan: "Bukittinggi",
+        tanggal: "",
+        kursi: "01A",
+        harga: 175000,
+        invoiceId: "",
+        waktuBerangkat: "07:30",
+        waktuTiba: "10:45",
+        namaArmada: "Toyota Hiace Executive",
+        kelas: "VIP CLASS",
+        bookingCode: ""
+    };
+
+    // Fungsi format tanggal
+    function formatTanggal(tanggalISO) {
+        if (!tanggalISO) return "Belum ditentukan";
+        try {
+            const date = new Date(tanggalISO);
+            if (isNaN(date.getTime())) return tanggalISO;
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        } catch(e) {
+            return tanggalISO;
+        }
+    }
+
+    // Generate barcode sederhana berdasarkan booking code
+    function generateBarcode(bookingCode) {
+        // Simulasi barcode dengan karakter khusus
+        let barcode = "";
+        for (let i = 0; i < bookingCode.length; i++) {
+            let charCode = bookingCode.charCodeAt(i);
+            barcode += charCode % 2 === 0 ? "|" : "█";
+        }
+        // Panjang barcode minimal 20 karakter
+        while (barcode.length < 24) {
+            barcode += "|";
+        }
+        return barcode;
+    }
+
+    // Generate booking code
+    function generateBookingCode() {
+        const today = new Date();
+        const tahun = today.getFullYear();
+        const bulan = String(today.getMonth() + 1).padStart(2, '0');
+        const hari = String(today.getDate()).padStart(2, '0');
+        const random = Math.floor(Math.random() * 900) + 100;
+        return `SRG-${tahun}${bulan}${hari}-${random}`;
+    }
+
+    // Load data dari localStorage
+    function loadTicketData() {
+        // Ambil dari localStorage yang disimpan oleh payment.html
+        const savedAsal = localStorage.getItem('travel_asal');
+        const savedTujuan = localStorage.getItem('travel_tujuan');
+        const savedTanggal = localStorage.getItem('travel_tanggal');
+        const savedKursi = localStorage.getItem('travel_kursi');
+        const savedHarga = localStorage.getItem('travel_harga');
+        const savedWaktuBerangkat = localStorage.getItem('travel_waktu_berangkat');
+        const savedWaktuTiba = localStorage.getItem('travel_waktu_tiba');
+        const savedNamaArmada = localStorage.getItem('travel_nama_armada');
+        const savedKelas = localStorage.getItem('travel_kelas');
+        const savedInvoiceId = localStorage.getItem('travel_booking_id');
+        const paymentStatus = localStorage.getItem('payment_status');
+        
+        if (savedAsal) ticketData.asal = savedAsal;
+        if (savedTujuan) ticketData.tujuan = savedTujuan;
+        if (savedTanggal) ticketData.tanggal = savedTanggal;
+        if (savedKursi) ticketData.kursi = savedKursi;
+        if (savedHarga) ticketData.harga = parseInt(savedHarga);
+        if (savedWaktuBerangkat) ticketData.waktuBerangkat = savedWaktuBerangkat;
+        if (savedWaktuTiba) ticketData.waktuTiba = savedWaktuTiba;
+        if (savedNamaArmada) ticketData.namaArmada = savedNamaArmada;
+        if (savedKelas) ticketData.kelas = savedKelas;
+        if (savedInvoiceId) ticketData.invoiceId = savedInvoiceId;
+        
+        // Generate atau ambil booking code
+        const savedBookingCode = localStorage.getItem('travel_booking_code');
+        if (savedBookingCode) {
+            ticketData.bookingCode = savedBookingCode;
+        } else {
+            ticketData.bookingCode = generateBookingCode();
+            localStorage.setItem('travel_booking_code', ticketData.bookingCode);
+        }
+        
+        // Cek status pembayaran (tambahan validasi)
+        if (paymentStatus !== 'success') {
+            console.warn('Status pembayaran belum terkonfirmasi');
+        }
+        
+        updateDisplay();
+    }
+
+    // Update tampilan dengan data
+    function updateDisplay() {
+        document.getElementById('asalDisplay').innerText = ticketData.asal;
+        document.getElementById('tujuanDisplay').innerText = ticketData.tujuan;
+        document.getElementById('tanggalDisplay').innerHTML = formatTanggal(ticketData.tanggal);
+        document.getElementById('waktuBerangkatDisplay').innerHTML = `${ticketData.waktuBerangkat} WIB`;
+        document.getElementById('waktuTibaDisplay').innerHTML = `${ticketData.waktuTiba} WIB`;
+        document.getElementById('kursiDisplay').innerText = ticketData.kursi;
+        document.getElementById('armadaDisplay').innerText = ticketData.namaArmada;
+        document.getElementById('kelasDisplay').innerText = ticketData.kelas;
+        document.getElementById('invoiceDisplay').innerText = ticketData.invoiceId;
+        document.getElementById('seatNumberDisplay').innerText = ticketData.kursi;
+        document.getElementById('bookingCodeDisplay').innerHTML = `KODE BOOKING: ${ticketData.bookingCode}`;
+        
+        // Generate dan tampilkan barcode
+        const barcode = generateBarcode(ticketData.bookingCode);
+        document.getElementById('barcodeDisplay').innerHTML = barcode;
+    }
+
+    // Download E-Ticket sebagai file HTML/PDF
+    function downloadTicket() {
+        // Ambil konten e-ticket untuk didownload
+        const ticketContent = document.querySelector('.eticket-card').cloneNode(true);
+        const successHeader = document.querySelector('.success-header').cloneNode(true);
+        const footerNote = document.querySelector('.footer-note').cloneNode(true);
+        
+        
+        
+        // Buat blob dan download
+        const blob = new Blob([downloadHtml], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `E-Ticket_${ticketData.bookingCode}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast('📥 E-Ticket berhasil diunduh!', 3000);
+    }
+
+    // Show toast notification
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toastMsg');
+        toast.innerHTML = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, duration);
+    }
+
+    // Inisialisasi
+    function init() {
+        loadTicketData();
+        
+        // Jika tidak ada data, redirect ke home
+        if (!ticketData.kursi || ticketData.kursi === "") {
+            setTimeout(() => {
+                if (confirm('Data tiket tidak ditemukan. Apakah Anda ingin kembali ke beranda?')) {
+                    location.href = 'home.html';
+                }
+            }, 500);
+        }
+    }
+    
+    init();
+</script>
+</body>
+</html>

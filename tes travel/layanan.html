@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Seragih Premium | Private Concierge & Luxury Travel</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      /* dark base seperti gambar (premium elegan) */
+      background-color: #0A0C0E;
+      color: #E8EDF0;
+      line-height: 1.4;
+    }
+
+    /* premium color palette — nuansa gelap mewah dengan aksen emas */
+    :root {
+      --gold: #D4AF6A;
+      --gold-dark: #B88A44;
+      --deep-charcoal: #111418;
+      --soft-black: #1A1F24;
+      --cream: #FCF8F0;
+      --white: #FFFFFF;
+      --card-bg: #14181C;
+      --border-dim: rgba(212, 175, 106, 0.2);
+      --shadow-sm: 0 20px 35px -12px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(255,255,255,0.02);
+      --shadow-md: 0 25px 35px -12px rgba(0, 0, 0, 0.5);
+      --glow-gold: 0 0 12px rgba(212, 175, 106, 0.3);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* HEADER / HERO — terinspirasi gambar: gelap, mewah, aksen emas */
+    .hero-section {
+      background: linear-gradient(145deg, #080B0E 0%, #12171C 100%);
+      border-radius: 0 0 56px 56px;
+      padding: 64px 0 90px;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(212, 175, 106, 0.3);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -15%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(212,175,106,0.12) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      bottom: -10%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212,175,106,0.06) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-name {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 0%, #EAD6B0 55%, #D4AF6A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .hero-greeting {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: rgba(255, 245, 225, 0.85);
+      max-width: 680px;
+      margin: 0 auto;
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-greeting i {
+      color: var(--gold);
+      margin-right: 10px;
+    }
+
+    .hero-name {
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(212, 175, 106, 0.18);
+      display: inline-block;
+      padding: 4px 18px;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+      border: 0.5px solid rgba(212, 175, 106, 0.4);
+    }
+
+    /* premium badge */
+    .premium-badge {
+      display: inline-block;
+      background: rgba(20, 24, 28, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 6px 20px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 106, 0.5);
+      letter-spacing: 1px;
+      margin-top: 28px;
+    }
+
+    /* services grid */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+      position: relative;
+      display: inline-block;
+      color: #F2E8DA;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 4px;
+      box-shadow: var(--glow-gold);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 32px;
+      margin-bottom: 70px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 32px 28px;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-dim);
+      backdrop-filter: blur(0px);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(212, 175, 106, 0.6);
+      background: #1A2026;
+    }
+
+    .card-icon {
+      font-size: 2.7rem;
+      color: var(--gold);
+      margin-bottom: 24px;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+    }
+
+    .service-card h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #F2E8DA;
+    }
+
+    .service-card p {
+      color: #9AAEB8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .btn-outline-premium {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #EAD6B0;
+      transition: 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-outline-premium i {
+      transition: transform 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .btn-outline-premium:hover {
+      background: var(--gold);
+      color: #0A0C0E;
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(212,175,106,0.4);
+    }
+
+    .btn-outline-premium:hover i {
+      transform: translateX(5px);
+      color: #0A0C0E;
+    }
+
+    /* exclusive offer card - tema gelap mewah */
+    .offer-section {
+      background: linear-gradient(115deg, #11181E 0%, #1A2128 100%);
+      border-radius: 48px;
+      padding: 52px 48px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(212, 175, 106, 0.35);
+      backdrop-filter: blur(2px);
+    }
+
+    .offer-text h4 {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .offer-text h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .offer-text p {
+      font-size: 1.05rem;
+      color: #BECCD4;
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      border: none;
+      padding: 14px 38px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: #0E1217;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.95rem;
+      transition: 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
+    .btn-gold:hover {
+      background: #C69E54;
+      color: #000000;
+      transform: scale(1.02);
+      box-shadow: 0 0 16px rgba(212,175,106,0.5);
+    }
+
+    /* tujuan populer dengan gaya elegan */
+    .popular-section {
+      margin-bottom: 64px;
+    }
+
+    .destinations-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .dest-card {
+      background: var(--card-bg);
+      border-radius: 36px;
+      flex: 1;
+      min-width: 220px;
+      padding: 30px 24px;
+      text-align: center;
+      transition: all 0.25s;
+      box-shadow: var(--shadow-sm);
+      border-bottom: 3px solid var(--gold);
+      border-right: 1px solid rgba(212,175,106,0.2);
+      border-left: 1px solid rgba(212,175,106,0.2);
+    }
+
+    .dest-card:hover {
+      transform: translateY(-5px);
+      background: #1F2A30;
+      border-bottom-width: 4px;
+    }
+
+    .dest-card h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #F0E2CE;
+      letter-spacing: -0.3px;
+    }
+
+    .dest-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .stats-item {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #C2D1DA;
+      background: rgba(20, 24, 28, 0.8);
+      padding: 10px 12px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .stats-item i {
+      color: var(--gold);
+      width: 28px;
+      font-size: 1rem;
+    }
+
+    .price-highlight {
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-left: 4px;
+    }
+
+    /* footer mewah seperti gambar */
+    .footer {
+      margin-top: 90px;
+      background: #0B1014;
+      border-radius: 48px 48px 0 0;
+      padding: 56px 32px 40px;
+      color: #A0B2BD;
+      border-top: 1px solid rgba(212, 175, 106, 0.25);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #D4AF6A, #F7E5C2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      letter-spacing: 0.3px;
+    }
+
+    .social-icons a {
+      color: #B7C7D0;
+      margin: 0 12px;
+      font-size: 1.3rem;
+      transition: 0.2s;
+    }
+    .social-icons a:hover {
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* CURATED COLLECTIONS teks tambahan */
+    .curated-tag {
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        padding: 0 24px;
+      }
+      .offer-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 28px;
+        gap: 28px;
+      }
+      .brand-name {
+        font-size: 2.6rem;
+      }
+      .hero-greeting {
+        font-size: 1.25rem;
+        padding: 0 12px;
+      }
+      .destinations-grid {
+        flex-direction: column;
+      }
+      .section-title {
+        font-size: 1.7rem;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-section {
+        padding: 48px 0 70px;
+      }
+      .brand-name {
+        font-size: 2.1rem;
+      }
+      .btn-gold, .btn-outline-premium {
+        font-size: 0.8rem;
+        padding: 8px 18px;
+      }
+    }
+
+    /* animasi micro */
+    .service-card, .dest-card {
+      transition: all 0.3s ease;
+    }
+    
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">Saragih Premium</div>
+  <div class="nav-links">
+    <a href="home.html">Destinasi</a>
+    <a href="results.html">Armada</a>
+    <a href="layanan.html" style="color:var(--orange);">Layanan</a>
+    <a href="payment.html">Payments</a>
+  </div>
+  <div class="nav-icons">
+    <button>👤</button>
+  </div>
+</nav>
+
+<div class="hero-section" >
+  <div class="container hero-content">
+    <div class="brand-name">Seragih Premium</div>
+    <div class="hero-greeting">
+      <i class="fas fa-map-pin"></i> Mau pergi kemana nih, 
+      <span class="hero-name">Fahmi</span> sudah siap berpergian?
+    </div>
+    <div class="premium-badge">
+      <i class="fas fa-crown" style="margin-right: 8px;"></i> PREMIUM MOBILITY & ELEGANCE
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- 6 Layanan utama persis dari gambar, dengan nuansa premium gelap -->
+  <div class="services-grid">
+    <!-- Tiket Travel -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-ticket-alt"></i></div>
+      <h3>Tiket Travel</h3>
+      <p>Book luxury shuttle seats for intercity routes with premium amenities.</p>
+      <a href="#" class="btn-outline-premium">BOOK NOW →</a>
+    </div>
+    <!-- Sewa Mobil -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-car-side"></i></div>
+      <h3>Sewa Mobil</h3>
+      <p>Daily rentals of pristine luxury vehicles for your business or leisure needs.</p>
+      <a href="#" class="btn-outline-premium">VIEW FLEET →</a>
+    </div>
+    <!-- Paket Wisata -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-umbrella-beach"></i></div>
+      <h3>Paket Wisata</h3>
+      <p>Curated luxury itineraries designed for the discerning global traveler.</p>
+      <a href="#" class="btn-outline-premium">DISCOVER →</a>
+    </div>
+    <!-- Antar Jemput Bandara -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-plane-arrival"></i></div>
+      <h3>Antar Jemput Bandara</h3>
+      <p>Seamless arrivals and departures with our private airport concierge service.</p>
+      <a href="#" class="btn-outline-premium">SCHEDULE →</a>
+    </div>
+    <!-- Kirim Paket / Barang -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-box"></i></div>
+      <h3>Kirim Paket / Barang</h3>
+      <p>Secure, high-priority courier services for your valuable possessions.</p>
+      <a href="#" class="btn-outline-premium">SEND NOW →</a>
+    </div>
+    <!-- Rental Supir -->
+    <div class="service-card">
+      <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+      <h3>Rental Supir</h3>
+      <p>Professional, uniformed chauffeurs available for half-day or full-day booking.</p>
+      <a href="#" class="btn-outline-premium">HIRE PROFESSIONAL →</a>
+    </div>
+  </div>
+
+  <!-- EXCLUSIVE OFFER area — terinspirasi gambar dengan gaya gelap mewah -->
+  <div class="offer-section">
+    <div class="offer-text">
+      <h4><i class="fas fa-gem"></i> EXCLUSIVE OFFER</h4>
+      <h2>Elevate Your Group Journey</h2>
+      <p>Save 25% on luxury van charters for Hiace and Alphard bookings this weekend. Travel in the comfort you deserve.</p>
+      <a href="#" class="btn-gold">Claim Package →</a>
+    </div>
+    <div style="font-size: 3.2rem; opacity: 0.7; filter: drop-shadow(0 0 6px rgba(212,175,106,0.4));">
+      <i class="fas fa-chalkboard-user"></i>
+    </div>
+  </div>
+
+  <!-- CURATED COLLECTIONS + Tujuan Populer seperti gambar -->
+  <div class="popular-section">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+      <div>
+        <div class="curated-tag"><i class="fas fa-star-of-life"></i> CURATED COLLECTIONS</div>
+        <div class="section-title" style="margin-bottom: 16px;">Tujuan Populer</div>
+        <p style="color: #9AAFB9; margin-top: 6px;">Destinasi favorit para pelancong premium dengan koneksi eksklusif</p>
+      </div>
+    </div>
+    <div class="destinations-grid">
+      <!-- Jakarta -->
+      <div class="dest-card">
+        <h3>Jakarta</h3>
+        <div class="dest-stats">
+          <div class="stats-item"><i class="fas fa-bus"></i> 120+ Daily Trips Available</div>
+          <div class="stats-item"><i class="fas fa-tag"></i> Mulai dari <span class="price-highlight">Rp 350rb+</span></div>
+        </div>
+      </div>
+      <!-- Bandung -->
+      <div class="dest-card">
+        <h3>Bandung</h3>
+        <div class="dest-stats">
+          <div class="stats-item"><i class="fas fa-bus"></i> 85+ Daily Trips Available</div>
+          <div class="stats-item"><i class="fas fa-tag"></i> Mulai dari <span class="price-highlight">Rp 250rb+</span></div>
+        </div>
+      </div>
+      <!-- Medan -->
+      <div class="dest-card">
+        <h3>Medan</h3>
+        <div class="dest-stats">
+          <div class="stats-item"><i class="fas fa-bus"></i> 45+ Daily Trips Available</div>
+          <div class="stats-item"><i class="fas fa-tag"></i> Mulai dari <span class="price-highlight">Rp 450rb+</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- informasi tambahan untuk memberikan kesan serupa gambar -->
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div>
+      <div class="footer-logo">SARAGIH PREMIUM</div>
+      <div class="footer-copyright" style="margin-top: 14px;">© 2024 VOYAGE ELITE PRIVATE CONCIERGE. ALL RIGHTS RESERVED.</div>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // efek interaksi premium, mirip gambar de    ngan sentuhan responsif
+  document.querySelectorAll('.btn-outline-premium, .btn-gold').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // subtle feedback
+      btn.style.transform = 'scale(0.96)';
+      setTimeout(() => { btn.style.transform = ''; }, 150);
+      // konsol opsional, bisa dihapus
+      console.log('✨ Navigasi layanan premium Seragih');
+    });
+  });
+
+  // tambahan efek hover dinamis pada kartu
+  const cards = document.querySelectorAll('.service-card, .dest-card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'all 0.25s ease';
+    });
+  });
+</script>
+</body>
+</html>

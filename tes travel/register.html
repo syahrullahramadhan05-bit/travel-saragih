@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { min-height:100vh; display:grid; grid-template-rows:1fr auto; }
+.register-wrap { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
+.reg-left { position:relative; overflow:hidden; }
+.reg-left-bg { position:absolute; inset:0; background:url('foto/𝟏𝟏_𝟏𝟏\ _\ ≽^•\ ˕\ •\ ྀི≼\ _\ s\ h\ \ i\ f\ t\ i\ n\ g\ content.jpg') center/cover; opacity:.5; }
+.reg-left-overlay { position:absolute; inset:0; background:linear-gradient(to right, rgba(10,10,10,.75) 0%, rgba(10,10,10,.3) 100%); }
+.reg-left-content { position:relative; z-index:2; padding:60px 48px; display:flex; flex-direction:column; justify-content:flex-end; height:100%; }
+.reg-left h2 { font-size:52px; font-weight:800; line-height:1.05; margin-bottom:16px; }
+.reg-left p { font-size:14px; color:#bbb; max-width:320px; line-height:1.7; }
+.elite-line { display:flex; align-items:center; gap:16px; margin-top:24px; }
+.elite-line hr { flex:1; border:none; border-top:1px solid var(--orange); opacity:.5; }
+.elite-line span { font-size:12px; color:var(--orange); letter-spacing:.12em; text-transform:uppercase; }
+.reg-right { background:var(--bg2); padding:60px 48px; display:flex; flex-direction:column; justify-content:center; overflow-y:auto; }
+.reg-brand { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--orange); margin-bottom:32px; }
+.reg-right h1 { font-size:36px; margin-bottom:8px; }
+.reg-right .sub { font-size:14px; color:var(--gray); margin-bottom:32px; }
+.terms-text { text-align:center; font-size:12px; color:var(--gray); line-height:1.6; margin-top:16px; }
+.terms-text a { color:var(--orange); }
+.have-account { text-align:center; margin-top:16px; font-size:13px; color:var(--gray); }
+.have-account a { color:var(--orange); font-weight:600; }
+.reg-footer { display:flex; justify-content:space-between; align-items:center; padding:18px 48px; border-top:1px solid var(--border); flex-wrap:wrap; gap:8px; font-size:12px; color:var(--gray2); }
+.reg-footer a { color:var(--gray2); }
+.reg-footer a:hover { color:var(--orange); }
+.badge-tag { display:inline-block; background:var(--orange-dim); color:var(--orange); border:1px solid rgba(232,137,43,.3); font-size:11px; padding:5px 14px; border-radius:50px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:24px; }
+@media(max-width:768px) {
+  .register-wrap { grid-template-columns:1fr; }
+  .reg-left { display:none; }
+  .reg-right { padding:40px 24px; }
+}
+</style>
+</head>
+<body>
+<div class="register-wrap">
+  <!-- LEFT VISUAL -->
+  <div class="reg-left">
+    <div class="reg-left-bg"></div>
+    <div class="reg-left-overlay"></div>
+    <div class="reg-left-content">
+      <span class="badge-tag">Layanan Eksklusif</span>
+      <h2>Perjalanan<br>Mewah<br>Hanya untuk<br>Anda.</h2>
+      <p>Bergabunglah dengan ekosistem Travel Saragih dan nikmati standar baru dalam kenyamanan transportasi antarkota.</p>
+      <div class="elite-line">
+        <hr><span>Elite Voyage Experience</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="reg-right">
+    <div class="reg-brand">Travel Saragih</div>
+    <h1>Buat Akun Baru</h1>
+    <p class="sub">Lengkapi data Anda untuk memulai perjalanan pertama.</p>
+
+    <div class="input-wrap no-label">
+      <label>Nama Lengkap</label>
+      <span class="input-icon">👤</span>
+      <input type="text" placeholder="Masukkan nama">
+    </div>
+    <div class="input-wrap no-label">
+      <label>Nomor Telepon</label>
+      <span class="input-icon">📞</span>
+      <input type="tel" placeholder="0812 3456 7890">
+    </div>
+    <div class="input-wrap no-label">
+      <label>Email</label>
+      <span class="input-icon">✉</span>
+      <input type="email" placeholder="nama@email.com">
+    </div>
+    <div class="input-wrap no-label">
+      <label>Password</label>
+      <span class="input-icon">🔒</span>
+      <input type="password" placeholder="••••••••">
+    </div>
+
+    <a href="home.html"><button class="btn btn-orange btn-full btn-lg" style="margin-bottom:12px;">Daftar Sekarang →</button></a>
+
+    <div class="or-divider"><hr><span>atau</span><hr></div>
+
+    <button class="btn-google">
+      <a href="https://accounts.google.com/v3/signin/identifier?dsh=S305938542%3A1775987216321487&hl=id&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=AT1y2_V-3D9eSIfWCBnc8u6TKdsofpeVYtrMBttBgzrgHOMxCKhRDpnAEnlWLTIGK33YsK1QKrN2zw">
+      <svg class="g-icon" viewBox="0 0 500 45"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Lanjutkan dengan Google
+      </a>
+    </button>
+
+    <p class="terms-text">Dengan mendaftar, Anda menyetujui <a href="#">Kebijakan Privasi</a> dan <a href="#">Syarat &amp; Ketentuan</a> Travel Saragih.</p>
+    <p class="have-account">Sudah memiliki akun? <a href="login.html">Masuk</a></p>
+  </div>
+</div>
+
+<div class="reg-footer">
+  <span>© 2024 Travel Saragih. Hak Cipta Dilindungi.</span>
+  <div style="display:flex;gap:20px;">
+    <a href="#">Kebijakan Privasi</a>
+    <a href="#">Syarat &amp; Ketentuan</a>
+    <a href="#">Pusat Bantuan</a>
+    <a href="#">Portal Admin</a>
+  </div>
+</div>
+
+<script>
+// Database users di localStorage
+function initUserDatabase() {
+    if (!localStorage.getItem('travel_users')) {
+        // Data dummy untuk demo
+        const defaultUsers = [
+            {
+                id: 1,
+                nama: "Admin Travel",
+                email: "admin@travelsaragih.com",
+                password: btoa("admin123"),
+                telepon: "081234567890",
+                role: "admin",
+                points: 9999,
+                trips: 50,
+                createdAt: new Date().toISOString()
+            }
+        ];
+        localStorage.setItem('travel_users', JSON.stringify(defaultUsers));
+    }
+}
+
+// Fungsi register
+function registerUser(event) {
+    event.preventDefault();
+    
+    // Ambil nilai dari form
+    const nama = document.querySelector('input[placeholder="Masukkan nama"]').value;
+    const telepon = document.querySelector('input[placeholder="0812 3456 7890"]').value;
+    const email = document.querySelector('input[placeholder="nama@email.com"]').value;
+    const password = document.querySelector('input[placeholder="••••••••"]').value;
+    
+    // Validasi
+    if (!nama || !email || !password) {
+        alert('❌ Nama, Email, dan Password harus diisi!');
+        return;
+    }
+    
+    if (password.length < 6) {
+        alert('❌ Password minimal 6 karakter!');
+        return;
+    }
+    
+    // Ambil data users yang sudah ada
+    let users = JSON.parse(localStorage.getItem('travel_users') || '[]');
+    
+    // Cek apakah email sudah terdaftar
+    const existingUser = users.find(u => u.email === email);
+    if (existingUser) {
+        alert('❌ Email sudah terdaftar! Silakan gunakan email lain.');
+        return;
+    }
+    
+    // Buat user baru
+    const newUser = {
+        id: Date.now(),
+        nama: nama,
+        email: email,
+        password: btoa(password), // Enkripsi sederhana
+        telepon: telepon,
+        role: 'user',
+        points: 0,
+        trips: 0,
+        createdAt: new Date().toISOString()
+    };
+    
+    // Simpan ke database
+    users.push(newUser);
+    localStorage.setItem('travel_users', JSON.stringify(users));
+    
+    // Tampilkan pesan sukses
+    alert('✅ Pendaftaran berhasil! Silakan login.');
+    
+    // Redirect ke halaman login
+    window.location.href = 'login.html';
+}
+
+// Inisialisasi database dan event listener
+initUserDatabase();
+const registerBtn = document.querySelector('.btn-orange');
+if (registerBtn) {
+    registerBtn.addEventListener('click', registerUser);
+}
+</script>
+</body>
+</html>

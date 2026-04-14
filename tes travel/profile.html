@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.profile-page { padding:40px 80px 80px; }
+.profile-hero { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-xl); padding:40px; margin-bottom:24px; display:flex; align-items:flex-end; gap:32px; background-image:linear-gradient(135deg, rgba(232,137,43,.08) 0%, transparent 60%); position:relative; overflow:hidden; }
+.avatar-wrap { position:relative; flex-shrink:0; }
+.profile-avatar { width:120px; height:120px; border-radius:var(--radius-lg); object-fit:cover; border:2px solid var(--border); }
+.member-badge { position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); background:var(--orange); color:#fff; font-size:10px; font-weight:700; letter-spacing:.1em; padding:4px 12px; border-radius:50px; text-transform:uppercase; white-space:nowrap; }
+.profile-info { flex:1; }
+.profile-name { font-size:42px; font-weight:800; margin-bottom:4px; }
+.profile-email { font-size:14px; color:var(--gray); margin-bottom:20px; }
+.profile-actions { display:flex; gap:12px; }
+.profile-deco { position:absolute; right:40px; top:50%; transform:translateY(-50%); opacity:.04; font-size:200px; font-family:'Syne',sans-serif; font-weight:800; color:var(--orange); pointer-events:none; user-select:none; }
+
+/* STATS */
+.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+.stat-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; }
+.stat-card.gold { background:linear-gradient(135deg, #8b5e0a, #5a3c08); border-color:#c8860a; }
+.s-label { font-size:10px; color:var(--gray); letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px; }
+.stat-card.gold .s-label { color:rgba(255,200,100,.7); }
+.s-num { font-family:'Syne',sans-serif; font-size:48px; font-weight:700; }
+.stat-card.gold .s-num { color:#ffd580; }
+.s-unit { font-size:14px; color:var(--gray); }
+.stat-card.gold .s-unit { color:rgba(255,200,100,.7); }
+.s-link { font-size:12px; color:var(--orange); margin-top:8px; display:block; }
+.s-xp { font-size:13px; color:rgba(255,200,100,.8); margin-top:4px; }
+.star-ico { float:right; font-size:28px; opacity:.6; }
+
+/* LAYOUT */
+.profile-main { display:grid; grid-template-columns:360px 1fr; gap:24px; }
+
+/* MENU */
+.menu-list { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; margin-bottom:16px; }
+.menu-sec-title { font-size:10px; color:var(--orange); letter-spacing:.1em; text-transform:uppercase; padding:16px 20px 8px; }
+.menu-item { display:flex; align-items:center; gap:14px; padding:16px 20px; border-top:1px solid var(--border); cursor:pointer; transition:background .2s; }
+.menu-item:hover { background:var(--bg4); }
+.m-icon { font-size:18px; color:var(--gray); width:24px; }
+.m-label { font-size:14px; flex:1; }
+.m-arrow { color:var(--gray); font-size:16px; }
+.logout-btn { width:100%; padding:16px; background:var(--danger); border:none; border-radius:var(--radius-lg); color:#fff; font-size:14px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:8px; transition:opacity .2s; }
+.logout-btn:hover { opacity:.9; }
+
+/* PERKS */
+.perks-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.perk-card { background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:var(--radius-lg); padding:24px; }
+.perk-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+.perk-icon { font-size:24px; }
+.perk-label { font-size:10px; color:var(--orange); letter-spacing:.1em; text-transform:uppercase; }
+.perk-card h4 { font-size:18px; font-weight:700; margin-bottom:8px; }
+.perk-card p { font-size:13px; color:var(--gray); line-height:1.5; }
+
+@media(max-width:900px) {
+  .profile-page { padding:20px; }
+  .profile-hero { flex-direction:column; align-items:flex-start; gap:20px; }
+  .profile-deco { display:none; }
+  .profile-main { grid-template-columns:1fr; }
+  .perks-grid { grid-template-columns:1fr; }
+  .stats-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">Saragih Premium</div>
+  <div class="nav-links">
+    <a href="home.html">Destinasi</a>
+    <a href="results.html">Armada</a>
+    <a href="layanan.html">Layanan</a>
+    <a href="payment.html">Payments</a>
+  </div>
+  <div class="nav-icons">
+    <button>👤</button>
+  </div>
+</nav>
+
+<div class="profile-page">
+  <!-- HERO -->
+  <div class="profile-hero">
+    <div class="avatar-wrap">
+      <img src="foto/rezi.jpeg" class="profile-avatar" alt="Fahmi">
+      <div class="member-badge">Silver Member</div>
+    </div>
+    <div class="profile-info">
+      <div class="profile-name">Fahmi</div>
+      <div class="profile-email">fahmi.traveler@gmail.com</div>
+      <div class="profile-actions">
+        <button class="btn btn-outline">Edit Profil</button>
+        <button class="btn btn-orange">Upgrade Status</button>
+      </div>
+    </div>
+    <div class="profile-deco">F</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="s-label">Total Trips</div>
+      <div><span class="s-num">12</span> <span class="s-unit">Journeys</span></div>
+      <a href="#" class="s-link">View history →</a>
+    </div>
+    <div class="stat-card gold">
+      <span class="star-ico">⭐</span>
+      <div class="s-label">Travel Points</div>
+      <div><span class="s-num">4,850</span> <span class="s-unit">XP</span></div>
+      <div class="s-xp">1.150 to Gold ↑</div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="profile-main">
+    <!-- LEFT MENU -->
+    <div>
+      <div class="menu-list">
+        <div class="menu-sec-title">Account Management</div>
+        <div class="menu-item"><span class="m-icon">📅</span><span class="m-label">My Bookings</span><span class="m-arrow">›</span></div>
+        <div class="menu-item"><span class="m-icon">💳</span><span class="m-label">Payment Methods</span><span class="m-arrow">›</span></div>
+        <div class="menu-item"><span class="m-icon">🏷</span><span class="m-label">Promo &amp; Vouchers</span><span class="m-arrow">›</span></div>
+        <div class="menu-item"><span class="m-icon">📍</span><span class="m-label">Saved Addresses</span><span class="m-arrow">›</span></div>
+      </div>
+      <div class="menu-list">
+        <div class="menu-sec-title">Support &amp; Legal</div>
+        <div class="menu-item"><span class="m-icon">⚙</span><span class="m-label">App Settings</span><span class="m-arrow">›</span></div>
+        <div class="menu-item"><span class="m-icon">❓</span><span class="m-label">Help Center</span><span class="m-arrow">›</span></div>
+        <div class="menu-item"><span class="m-icon">ℹ</span><span class="m-label">About Saragih Travel</span><span class="m-arrow">›</span></div>
+      </div>
+      <button class="logout-btn" onclick="location.href='login.html'">↩ LOGOUT</button>
+    </div>
+
+    <!-- RIGHT PERKS -->
+    <div>
+      <div class="perks-grid">
+        <div class="perk-card">
+          <div class="perk-top">
+            <div class="perk-icon"></div>
+            <div class="perk-label">Elite Perks</div>
+          </div>
+          <h4>Priority Lounge Access</h4>
+          <p>As a Silver Member, you have 2 remaining lounge passes for Soekarno-Hatta Int'l Terminal 3.</p>
+        </div>
+        <div class="perk-card">
+          <div class="perk-top">
+            <div class="perk-icon"></div>
+            <div class="perk-label">Concierge</div>
+          </div>
+          <h4>Personal Assistant</h4>
+          <p>Your dedicated concierge is available 24/7 for bespoke travel arrangements and special requests.</p>
+        </div>
+        <div class="perk-card">
+          <div class="perk-top">
+            <div class="perk-icon"></div>
+            <div class="perk-label">Rewards</div>
+          </div>
+          <h4>Cashback 10%</h4>
+          <p>Nikmati cashback 10% untuk setiap pemesanan menggunakan poin Silver Member Anda.</p>
+        </div>
+        <div class="perk-card">
+          <div class="perk-top">
+            <div class="perk-icon"></div>
+            <div class="perk-label">Upgrade</div>
+          </div>
+          <h4>Gold Status</h4>
+          <p>Hanya butuh 1.150 XP lagi untuk naik ke level Gold dan nikmati benefit premium eksklusif.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-logo">TRAVEL SARAGIH</div></div>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Luxury Charter</a>
+    <a href="#">Corporate Portal</a>
+  </div>
+  <div class="footer-copy">© 2024 Travel Saragih. All Rights Reserved.</div>
+</footer>
+
+<script>
+// Load data user ke profile
+function loadUserProfile() {
+    const currentUser = JSON.parse(localStorage.getItem('travel_current_user'));
+    
+    if (!currentUser) {
+        // Belum login, redirect ke login
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Update nama
+    const nameElements = document.querySelectorAll('.profile-name, .profile-name');
+    nameElements.forEach(el => {
+        if (el.textContent === 'Fahmi' || el.textContent === 'Fahmi') {
+            el.textContent = currentUser.nama;
+        }
+    });
+    
+    // Update email
+    const emailElements = document.querySelectorAll('.profile-email');
+    emailElements.forEach(el => {
+        el.textContent = currentUser.email;
+    });
+    
+    // Update points
+    const pointsElements = document.querySelectorAll('.s-num');
+    pointsElements.forEach(el => {
+        const parent = el.closest('.stat-card');
+        if (parent && parent.classList.contains('gold')) {
+            el.textContent = currentUser.points || 0;
+        } else if (parent && !parent.classList.contains('gold')) {
+            el.textContent = currentUser.trips || 0;
+        }
+    });
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('travel_current_user');
+    localStorage.removeItem('travel_remember_token');
+    window.location.href = 'login.html';
+}
+
+// Panggil loadUserProfile
+loadUserProfile();
+
+// Tambahkan event listener ke tombol logout jika ada
+const logoutBtn = document.querySelector('.logout-btn');
+if (logoutBtn) {
+    logoutBtn.onclick = logout;
+}
+</script>
+</body>
+</html>

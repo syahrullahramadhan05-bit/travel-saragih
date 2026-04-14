@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { display:flex; flex-direction:column; min-height:100vh; }
+.login-wrapper {
+  flex:1; display:grid; grid-template-columns:1fr 1fr;
+  max-width:1100px; width:95%; margin:auto;
+  background:var(--card); border-radius:var(--radius-xl);
+  overflow:hidden; border:1px solid var(--border);
+  min-height:620px; margin-top:40px; margin-bottom:40px;
+}
+.login-left { position:relative; overflow:hidden; }
+.login-left-bg { position:absolute; inset:0; background:url('foto/Inova\ cumi\ cumi\ darat.jpg') center/cover; opacity:.45; }
+.login-left-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,10,.95) 0%, rgba(10,10,10,.2) 100%); }
+.login-left-content { position:relative; z-index:2; padding:40px; display:flex; flex-direction:column; justify-content:flex-end; height:100%; }
+.login-star { width:40px; height:40px; border-radius:50%; background:var(--orange); display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:auto; }
+.login-tag { display:inline-block; border:1px solid var(--orange); color:var(--orange); font-size:12px; letter-spacing:.12em; padding:6px 14px; border-radius:50px; text-transform:uppercase; margin-bottom:16px; }
+.login-left h2 { font-size:36px; font-weight:800; line-height:1.1; margin-bottom:12px; }
+.login-left h2 span { color:var(--orange); }
+.login-left p { font-size:13px; color:#aaa; line-height:1.6; max-width:280px; }
+.login-right { padding:48px 40px; display:flex; flex-direction:column; justify-content:center; }
+.login-right h1 { font-size:32px; margin-bottom:6px; }
+.login-right .subtitle { color:var(--gray); font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:36px; }
+.form-row-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.form-row-label label { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); font-weight:500; }
+.form-row-label a { font-size:12px; color:var(--orange); font-weight:600; }
+.remember-row { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+.remember-row input { accent-color:var(--orange); width:16px; height:16px; }
+.remember-row label { font-size:13px; color:var(--gray); }
+.login-footer-text { text-align:center; margin-top:20px; font-size:13px; color:var(--gray); }
+.login-footer-text a { color:var(--orange); font-weight:600; }
+.security-row { display:flex; align-items:center; justify-content:space-between; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+.security-icons { display:flex; gap:8px; }
+.sec-icon { width:28px; height:28px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--gray); }
+.enc-text { font-size:10px; color:var(--gray2); letter-spacing:.1em; text-transform:uppercase; }
+.login-footer-links { display:flex; justify-content:center; gap:24px; padding:20px; flex-wrap:wrap; }
+.login-footer-links a { font-size:11px; color:var(--gray2); letter-spacing:.08em; text-transform:uppercase; }
+.login-footer-links a:hover { color:var(--orange); }
+.pass-wrap { position:relative; }
+.pass-eye { position:absolute; right:14px; top:50%; transform:translateY(-50%); color:var(--gray); cursor:pointer; font-size:16px; }
+@media(max-width:768px) {
+  .login-wrapper { grid-template-columns:1fr; }
+  .login-left { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div style="display:flex; justify-content:center; align-items:flex-start; padding:20px; min-height:100vh;">
+  <div class="login-wrapper">
+    <!-- LEFT VISUAL -->
+    <div class="login-left">
+      <div class="login-left-bg"></div>
+      <div class="login-left-overlay"></div>
+      <div class="login-left-content">
+        <div class="login-star">⭐</div>
+        <div class="login-tag">First Class Travel</div>
+        <h2>TRAVEL<br><span>SARAGIH</span></h2>
+        <p>Nikmati perjalanan premium dengan armada terbaik dan layanan personal yang mengutamakan kenyamanan Anda di setiap rute.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="login-right">
+      <h1>Selamat Datang</h1>
+      <p class="subtitle">Masuk ke akun Anda</p>
+
+      <div class="input-wrap">
+        <label>Email atau Nomor Telepon</label>
+        <span class="input-icon">✉</span>
+        <input type="email" placeholder="user@example.com">
+      </div>
+
+      <div class="input-wrap pass-wrap">
+        <div class="form-row-label">
+          <label>Kata Sandi</label>
+          <a href="#">Lupa Sandi?</a>
+        </div>
+        <span class="input-icon">🔒</span>
+        <input type="password" id="passInput" placeholder="••••••••••" style="padding-right:44px;">
+        <span class="pass-eye" onclick="togglePass()">👁</span>
+      </div>
+
+      <div class="remember-row">
+        <input type="checkbox" id="remember">
+        <label for="remember">Ingat saya untuk sesi berikutnya</label>
+      </div>
+
+      <a href="home.html"><button class="btn btn-orange btn-full btn-lg" style="margin-bottom:12px;">Masuk Sekarang →</button></a>
+
+      <button class="btn-google">
+        <a href="https://accounts.google.com/v3/signin/identifier?dsh=S305938542%3A1775987216321487&hl=id&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=AT1y2_V-3D9eSIfWCBnc8u6TKdsofpeVYtrMBttBgzrgHOMxCKhRDpnAEnlWLTIGK33YsK1QKrN2zw">
+        <svg class="g-icon" viewBox="0 0 500 49"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Masuk dengan Google
+        </a>
+      </button>
+
+      <p class="login-footer-text">Belum memiliki akun? <a href="register.html">Daftar Sekarang</a></p>
+
+      <div class="security-row">
+        <div class="security-icons">
+          <div class="sec-icon">🛡</div>
+          <div class="sec-icon">✔</div>
+        </div>
+        <span class="enc-text">Encrypted Connection</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="login-footer-links">
+  <a href="#">© 2024 Travel Saragih</a>
+  <a href="#">Syarat &amp; Ketentuan</a>
+  <a href="#">Kebijakan Privasi</a>
+  <a href="#">Pusat Bantuan</a>
+</div>
+
+<script>
+function togglePass() {
+  const i = document.getElementById('passInput');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+
+function togglePass() {
+  const i = document.getElementById('passInput');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+
+// Fungsi login
+function loginUser(event) {
+    event.preventDefault();
+    
+    // Ambil nilai dari form
+    const email = document.querySelector('input[type="email"]').value;
+    const password = document.getElementById('passInput').value;
+    const remember = document.getElementById('remember').checked;
+    
+    // Validasi
+    if (!email || !password) {
+        alert('❌ Email dan password harus diisi!');
+        return;
+    }
+    
+    // Ambil data users
+    const users = JSON.parse(localStorage.getItem('travel_users') || '[]');
+    
+    // Cari user
+    const user = users.find(u => u.email === email && atob(u.password) === password);
+    
+    if (user) {
+        // Simpan session user (tanpa password)
+        const sessionUser = {
+            id: user.id,
+            nama: user.nama,
+            email: user.email,
+            role: user.role,
+            points: user.points,
+            trips: user.trips,
+            loginAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('travel_current_user', JSON.stringify(sessionUser));
+        
+        // Jika centang "Ingat saya", simpan juga di sessionStorage
+        if (remember) {
+            localStorage.setItem('travel_remember_token', btoa(email + ':' + Date.now()));
+        }
+        
+        alert('✅ Login berhasil! Selamat datang, ' + user.nama);
+        
+        // Redirect ke home
+        window.location.href = 'home.html';
+    } else {
+        alert('❌ Email atau password salah!');
+    }
+}
+
+// Cek apakah user sudah login sebelumnya
+function checkAutoLogin() {
+    const currentUser = localStorage.getItem('travel_current_user');
+    const rememberToken = localStorage.getItem('travel_remember_token');
+    
+    if (currentUser && window.location.pathname.includes('login.html')) {
+        window.location.href = 'home.html';
+    }
+}
+
+// Event listener untuk tombol login
+const loginBtn = document.querySelector('.btn-orange');
+if (loginBtn) {
+    loginBtn.addEventListener('click', loginUser);
+}
+
+// Cek auto login
+checkAutoLogin();
+</script>
+</body>
+</html>

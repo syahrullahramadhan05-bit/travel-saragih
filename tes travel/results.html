@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Pencarian — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.results-page { padding:60px 80px; }
+.results-page h1 { font-size:48px; font-weight:800; margin-bottom:8px; }
+.results-page h1 span { color:var(--orange); }
+.results-tag { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--orange); margin-bottom:8px; }
+.results-controls { display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px; margin-top:16px; }
+
+.ticket-card {
+  display:grid; grid-template-columns:220px 1fr auto;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden; margin-bottom:16px;
+  transition:border-color .2s; cursor:pointer;
+}
+.ticket-card:hover { border-color:var(--orange); }
+.ticket-img { position:relative; }
+.ticket-img img { width:220px; height:180px; object-fit:cover; display:block; }
+.class-badges { position:absolute; top:10px; left:10px; display:flex; gap:6px; }
+.ticket-body { padding:24px 28px; display:flex; flex-direction:column; justify-content:space-between; }
+.ticket-time { display:flex; align-items:center; gap:20px; margin-bottom:16px; }
+.t-block .t { font-family:'Syne',sans-serif; font-size:32px; font-weight:700; }
+.t-block .loc { font-size:11px; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; margin-top:2px; }
+.t-arrow { display:flex; align-items:center; gap:8px; color:var(--gray); font-size:13px; }
+.t-arrow::before, .t-arrow::after { content:''; width:40px; height:1px; background:var(--border); display:block; }
+.amenities { display:flex; gap:8px; flex-wrap:wrap; }
+.amenity { display:flex; align-items:center; gap:6px; background:var(--bg3); border:1px solid var(--border); border-radius:50px; padding:5px 12px; font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:.06em; }
+.ticket-right { padding:24px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; border-left:1px solid var(--border); min-width:190px; }
+.operator { font-size:11px; color:var(--orange); letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+.rating { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--gray); }
+.star { color:#f59e0b; }
+.price-label { font-size:10px; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; }
+.price-amount { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--orange); }
+.price-per { font-size:11px; color:var(--gray); }
+
+@media(max-width:768px) {
+  .results-page { padding:40px 20px; }
+  .ticket-card { grid-template-columns:1fr; }
+  .ticket-img img { width:100%; height:200px; }
+  .ticket-right { border-left:none; border-top:1px solid var(--border); flex-direction:row; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">Saragih Premium</div>
+  <div class="nav-links">
+    <a href="home.html">Destinasi</a>
+    <a href="results.html" style="color:var(--orange);">Armada</a>
+    <a href="layanan.html">Layanan</a>
+    <a href="payment.html">Payments</a>
+  </div>
+  <div class="nav-icons">
+    <button title="Profil" onclick="location.href='profile.html'">👤</button>
+  </div>
+</nav>
+
+<div class="results-page">
+  <p class="results-tag" id="resultsTag">Hasil Pencarian</p>
+  <h1 id="routeTitle">Pekanbaru <span>→</span> Bukittinggi</h1>
+  <div class="results-controls">
+    <button class="btn btn-dark" onclick="showFilterAlert()">⚙ Filter</button>
+    <button class="btn btn-dark" onclick="showSortAlert()">↕ Urutkan</button>
+  </div>
+
+  <!-- TICKET 1 - Hiace VIP -->
+  <div class="ticket-card" onclick="pilihArmada('hiace', 175000, 'VIP CLASS', '07:30', '10:45', 'Toyota Hiace Executive', '📶 Free Wifi, 🔌 USB Port, 🪑 Kursi Recliner')">
+    <div class="ticket-img">
+      <img src="foto/Jenis-dan-Kapasitas-Hiace.jpg" alt="VIP">
+      <div class="class-badges">
+        <span class="badge" style="background:var(--orange);color:#fff;font-size:10px;">VIP CLASS</span>
+      </div>
+    </div>
+    <div class="ticket-body">
+      <div class="ticket-time">
+        <div class="t-block"><div class="t">07:30</div><div class="loc asal-text">Pekanbaru</div></div>
+        <div class="t-arrow">🚌</div>
+        <div class="t-block"><div class="t">10:45</div><div class="loc tujuan-text">Bukittinggi</div></div>
+      </div>
+      <div class="amenities">
+        <div class="amenity">📶 Free Wifi</div>
+        <div class="amenity">🔌 USB Port</div>
+        <div class="amenity">🪑 Recliner</div>
+      </div>
+    </div>
+    <div class="ticket-right">
+      <div>
+        <div class="operator">Travel Saragih Elite</div>
+        <div class="rating"><span class="star">★</span> 4.9 <span style="color:var(--gray2);">(128 Reviews)</span></div>
+      </div>
+      <div style="text-align:right;">
+        <div class="price-label">Mulai dari</div>
+        <div class="price-amount">Rp 175.000</div>
+        <div class="price-per">/ kursi</div>
+        <button class="btn btn-orange" style="margin-top:12px;">Pilih Kursi ›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKET 2 - Reborn Premium -->
+  <div class="ticket-card" onclick="pilihArmada('reborn', 135000, 'PREMIUM', '09:00', '12:15', 'Toyota Reborn', '🔌 USB Port, 🪑 Kursi Nyaman')">
+    <div class="ticket-img">
+      <img src="foto/Kursi_belakang_Toyota_Innova_Reborn.png" alt="Premium">
+      <div class="class-badges">
+        <span class="badge" style="background:var(--bg4);color:var(--orange);border:1px solid var(--orange);font-size:10px;">PREMIUM</span>
+      </div>
+    </div>
+    <div class="ticket-body">
+      <div class="ticket-time">
+        <div class="t-block"><div class="t">09:00</div><div class="loc asal-text">Pekanbaru</div></div>
+        <div class="t-arrow">🚌</div>
+        <div class="t-block"><div class="t">12:15</div><div class="loc tujuan-text">Bukittinggi</div></div>
+      </div>
+      <div class="amenities">
+        <div class="amenity">🔌 USB Port</div>
+        <div class="amenity" style="opacity:.5;">📶 No Wifi</div>
+      </div>
+    </div>
+    <div class="ticket-right">
+      <div>
+        <div class="operator">Travel Saragih Reguler</div>
+        <div class="rating"><span class="star">★</span> 4.7 <span style="color:var(--gray2);">(342 Reviews)</span></div>
+      </div>
+      <div style="text-align:right;">
+        <div class="price-label">Mulai dari</div>
+        <div class="price-amount">Rp 135.000</div>
+        <div class="price-per">/ kursi</div>
+        <button class="btn btn-orange" style="margin-top:12px;">Pilih Kursi ›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKET 3 - Hiace Elite Night -->
+  <div class="ticket-card" onclick="pilihArmada('hiaceelite', 230000, 'VIP NIGHT', '13:30', '16:45', 'Toyota Hiace Elite', '📶 Free Wifi, 🍽 Meal Included, 🛏 Kursi Bed')">
+    <div class="ticket-img">
+      <img src="foto/Keunggulan-Hiace-Premio-Luxury.jpg" alt="Night">
+      <div class="class-badges">
+        <span class="badge" style="background:var(--orange);color:#fff;font-size:10px;">VIP CLASS</span>
+        <span class="badge" style="background:var(--bg4);color:var(--gray);font-size:10px;">NIGHT</span>
+      </div>
+    </div>
+    <div class="ticket-body">
+      <div class="ticket-time">
+        <div class="t-block"><div class="t">13:30</div><div class="loc asal-text">Pekanbaru</div></div>
+        <div class="t-arrow">🚌</div>
+        <div class="t-block"><div class="t">16:45</div><div class="loc tujuan-text">Bukittinggi</div></div>
+      </div>
+      <div class="amenities">
+        <div class="amenity">📶 Free Wifi</div>
+        <div class="amenity">🍽 Meal Included</div>
+      </div>
+    </div>
+    <div class="ticket-right">
+      <div>
+        <div class="operator">Travel Saragih Elite Night</div>
+        <div class="rating"><span class="star">★</span> 5.0 <span style="color:var(--gray2);">(89 Reviews)</span></div>
+      </div>
+      <div style="text-align:right;">
+        <div class="price-label">Mulai dari</div>
+        <div class="price-amount">Rp 230.000</div>
+        <div class="price-per">/ kursi</div>
+        <button class="btn btn-orange" style="margin-top:12px;">Pilih Kursi ›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-logo">LUXETRAVEL</div><div class="footer-tagline">© 2024 LuxeTravel Private Concierge. All rights reserved.</div></div>
+  <div class="footer-links">
+    <a href="#">Syarat &amp; Ketentuan</a>
+    <a href="#">Kebijakan Privasi</a>
+    <a href="#">Portal Admin</a>
+  </div>
+</footer>
+
+<script>
+// Ambil parameter dari URL
+const urlParams = new URLSearchParams(window.location.search);
+let asal = urlParams.get('asal') || localStorage.getItem('travel_asal') || 'Pekanbaru';
+let tujuan = urlParams.get('tujuan') || localStorage.getItem('travel_tujuan') || 'Bukittinggi';
+let tanggal = urlParams.get('tanggal') || localStorage.getItem('travel_tanggal') || '';
+
+// Simpan ke localStorage
+localStorage.setItem('travel_asal', asal);
+localStorage.setItem('travel_tujuan', tujuan);
+localStorage.setItem('travel_tanggal', tanggal);
+
+// Update judul rute
+document.getElementById('routeTitle').innerHTML = asal + ' <span style="color:var(--orange);">→</span> ' + tujuan;
+
+// Update tag pencarian
+if (tanggal) {
+  const tgl = new Date(tanggal);
+  const tglStr = tgl.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('resultsTag').textContent = 'Hasil Pencarian • ' + asal + ' ke ' + tujuan + ' • ' + tglStr;
+}
+
+// Update semua teks asal dan tujuan
+document.querySelectorAll('.asal-text').forEach(el => el.textContent = asal);
+document.querySelectorAll('.tujuan-text').forEach(el => el.textContent = tujuan);
+
+// Fungsi untuk memilih armada dan menyimpan semua data
+function pilihArmada(armadaId, harga, kelas, waktuBerangkat, waktuTiba, namaArmada, fasilitas) {
+  // Simpan semua data armada ke localStorage
+  localStorage.setItem('travel_armada_id', armadaId);
+  localStorage.setItem('travel_harga', harga);
+  localStorage.setItem('travel_kelas', kelas);
+  localStorage.setItem('travel_waktu_berangkat', waktuBerangkat);
+  localStorage.setItem('travel_waktu_tiba', waktuTiba);
+  localStorage.setItem('travel_nama_armada', namaArmada);
+  localStorage.setItem('travel_fasilitas', fasilitas);
+  
+  // Redirect ke halaman pemilihan kursi yang sesuai
+  let seatPage = '';
+  switch(armadaId) {
+    case 'hiace':
+      seatPage = 'seatshiace.html';
+      break;
+    case 'reborn':
+      seatPage = 'seatsreborn.html';
+      break;
+    case 'hiaceelite':
+      seatPage = 'seatshiaceelite.html';
+      break;
+    default:
+      seatPage = 'seats.html';
+  }
+
+  
+  
+  window.location.href = seatPage + '?harga=' + harga + '&kelas=' + encodeURIComponent(kelas) + '&armada=' + encodeURIComponent(namaArmada);
+}
+
+function showFilterAlert() {
+  alert('Fitur filter akan segera hadir!');
+}
+
+function showSortAlert() {
+  alert('Fitur urutkan akan segera hadir!');
+}
+</script>
+</body>
+</html>

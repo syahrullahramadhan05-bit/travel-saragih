@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran — Travel Saragih</title>
+<link rel="stylesheet" href="style.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #131313;
+    font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    color: #ffffff;
+}
+
+.seat-back { padding:20px 80px; display:flex; align-items:center; gap:10px; font-size:13px; color:var(--orange); cursor:pointer; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid var(--border); }
+.seat-back:hover { opacity:.8; }
+
+/* Global Variables */
+:root {
+    --orange: #f59e0b;
+    --orange-light: #fbbf24;
+    --orange-dim: rgba(245, 158, 11, 0.15);
+    --bg2: #1a1f2a;
+    --bg3: #19191a;
+    --bg4: #252c38;
+    --border: #2a303e;
+    --gray: #8a99b0;
+    --gray2: #6b7a8f;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --blue: #3b82f6;
+}
+
+/* Navigation */
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 12, 16, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* .nav-logo {
+    font-family: 'Syne', 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: -0.5px;
+}
+
+.nav-icons button {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+    color: var(--gray);
+}
+
+.nav-icons button:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+} */
+
+/* Payment Page */
+.payment-page {
+    padding: 48px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.payment-page h1 {
+    font-size: 35px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.payment-page .sub {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 48px;
+}
+
+.payment-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 48px;
+}
+
+/* INVOICE CARD */
+.invoice-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: sticky;
+    top: 100px;
+}
+
+.invoice-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.inv-id-label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.inv-id {
+    font-family: 'Syne', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.status-badge {
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 6px 10px;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.route-stop {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.route-stop:last-of-type {
+    border-bottom: none;
+}
+
+.stop-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--bg4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.stop-details {
+    flex: 1;
+}
+
+.stop-label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.stop-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.schedule-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.schedule-label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.schedule-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--orange);
+}
+
+.invoice-totals {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-top: 8px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.total-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.total-amount {
+    font-family: 'Syne', monospace;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+}
+
+.total-date {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.seat-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.seat-info-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.seat-info-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.armada-name {
+    font-size: 12px;
+    color: var(--gray2);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+/* PAYMENT METHODS SECTION */
+.payment-methods-section {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.pay-section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.pay-group {
+    margin-bottom: 32px;
+}
+
+.pay-group-title {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+/* E-Wallet Grid */
+.ewallet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.ewallet-btn {
+    background: var(--bg4);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    font-weight: 600;
+    font-size: 14px;
+    color: #e0e4ec;
+}
+
+.ewallet-btn:hover {
+    border-color: var(--orange);
+    background: #2f3848;
+    transform: translateY(-2px);
+}
+
+.ewallet-btn.active {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, var(--orange-dim), rgba(245, 158, 11, 0.25));
+    color: var(--orange);
+}
+
+/* Bank List */
+.bank-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bank-item {
+    background: var(--bg4);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.bank-item:hover {
+    border-color: var(--orange);
+    background: #2f3848;
+}
+
+.bank-item.active {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, var(--orange-dim), rgba(245, 158, 11, 0.15));
+}
+
+.bank-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.bank-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--bg3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.bank-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+}
+
+.bank-verify {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 4px;
+}
+
+.radio-indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray);
+    border-radius: 50%;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.bank-item.active .radio-indicator,
+.card-item.active .radio-indicator {
+    background: var(--orange);
+    border-color: var(--orange);
+    box-shadow: inset 0 0 0 3px var(--bg4);
+}
+
+/* Card Item */
+.card-item {
+    background: var(--bg4);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.card-item:hover {
+    border-color: var(--orange);
+    background: #2f3848;
+}
+
+.card-item.active {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, var(--orange-dim), rgba(245, 158, 11, 0.15));
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--bg3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.card-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+}
+
+/* Confirm Button */
+.confirm-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--orange), #ea580c);
+    border: none;
+    border-radius: 60px;
+    padding: 18px 28px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a1f2a;
+    cursor: pointer;
+    margin-top: 32px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+}
+
+.confirm-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+.confirm-amount {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+/* Security Footer */
+.security-footer {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--border);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    color: var(--orange);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Toast Notification */
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange);
+    color: #1a1f2a;
+    padding: 14px 28px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 1001;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .topnav {
+        padding: 16px 24px;
+    }
+    .payment-page {
+        padding: 32px 24px;
+    }
+    .payment-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .invoice-card {
+        position: static;
+    }
+    .ewallet-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .ewallet-grid {
+        grid-template-columns: 1fr;
+    }
+    .payment-page h1 {
+        font-size: 32px;
+    }
+    .toast-message {
+        white-space: normal;
+        text-align: center;
+        max-width: 90%;
+    }
+}
+@media(max-width:768px) {
+  .seat-layout { grid-template-columns:1fr; padding:20px; }
+  .seat-back { padding:16px 20px; }
+  .sticky-bottom { padding:16px 20px; flex-wrap:wrap; gap:16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+    <div class="nav-logo">Saragih Premium</div>
+    <div class="nav-icons">
+        <button title="Profil" onclick="location.href='profile.html'">👤</button>
+    </div>
+</nav>
+
+<a href="home.html" class="seat-back">← Kembali ke Destinasi</a>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Memproses Pembayaran...</div>
+</div>
+
+<div class="payment-page">
+    <h1>Saragih Premium</h1>
+    <div class="sub">Selesaikan Pembayaran Anda — Tinjau rencana perjalanan mewah Anda dan pilih metode pembayaran.</div>
+
+    <div class="payment-layout">
+        <!-- INVOICE SECTION KIRI -->
+        <div class="invoice-card">
+            <div class="invoice-top">
+                <div>
+                    <div class="inv-id-label">INVOICE ID</div>
+                    <div class="inv-id" id="invoiceId">#PT-2222</div>
+                </div>
+                <div class="status-badge">MENUNGGU BAYAR</div>
+            </div>
+
+            <div class="route-stop">
+                <div class="stop-icon">📍</div>
+                <div class="stop-details">
+                    <div class="stop-label">ASAL</div>
+                    <div class="stop-name" id="asalDisplay">Pekanbaru</div>
+                </div>
+            </div>
+
+            <div class="route-stop">
+                <div class="stop-icon">🏁</div>
+                <div class="stop-details">
+                    <div class="stop-label">TUJUAN</div>
+                    <div class="stop-name" id="tujuanDisplay">Bukittinggi</div>
+                </div>
+            </div>
+
+            <div class="schedule-row">
+                <span class="schedule-label">WAKTU KEBERANGKATAN</span>
+                <span class="schedule-value" id="waktuBerangkat">07:30</span>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-label">WAKTU TIBA</span>
+                <span class="schedule-value" id="waktuTiba">10:45</span>
+            </div>
+
+            <div class="invoice-totals">
+                <div class="total-row">
+                    <span class="total-label">TOTAL PEMBAYARAN</span>
+                    <span class="total-amount" id="totalHarga">Rp 175.000</span>
+                </div>
+                <div class="total-row">
+                    <span class="total-label">TANGGAL PERJALANAN</span>
+                    <span class="total-date" id="tanggalDisplay">20 Januari 2026</span>
+                </div>
+            </div>
+
+            <div class="seat-info-row">
+                <span class="seat-info-label">KURSI DIPILIH</span>
+                <span class="seat-info-value" id="kursiDisplay">01A</span>
+            </div>
+            
+            <div class="armada-name" id="armadaDisplay">Toyota Hiace Executive</div>
+        </div>
+
+        <!-- PAYMENT METHODS KANAN -->
+        <div class="payment-methods-section">
+            <div class="pay-section-label">PILIHAN METODE PEMBAYARAN</div>
+
+            <!-- E-WALLET GROUP -->
+            <div class="pay-group">
+                <div class="pay-group-title">E-WALLET</div>
+                <div class="ewallet-grid">
+                    <div class="ewallet-btn" data-method="OVO" data-type="ewallet">OVO</div>
+                    <div class="ewallet-btn" data-method="GoPay" data-type="ewallet">GoPay</div>
+                    <div class="ewallet-btn" data-method="Dana" data-type="ewallet">Dana</div>
+                </div>
+            </div>
+
+            <!-- BANK TRANSFER GROUP -->
+            <div class="pay-group">
+                <div class="pay-group-title">BANK TRANSFER</div>
+                <div class="bank-list">
+                    <div class="bank-item" data-method="BCA" data-type="bank">
+                        <div class="bank-left">
+                            <div class="bank-icon">🏦</div>
+                            <div>
+                                <div class="bank-name">BCA Virtual Account</div>
+                                <div class="bank-verify">Instant verification</div>
+                            </div>
+                        </div>
+                        <div class="bank-right">
+                            <span class="radio-indicator"></span>
+                        </div>
+                    </div>
+                    <div class="bank-item" data-method="Mandiri" data-type="bank">
+                        <div class="bank-left">
+                            <div class="bank-icon">🏧</div>
+                            <div>
+                                <div class="bank-name">Mandiri Transfer</div>
+                                <div class="bank-verify">Requires manual verification</div>
+                            </div>
+                        </div>
+                        <div class="bank-right">
+                            <span class="radio-indicator"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREDIT / DEBIT CARD -->
+            <div class="pay-group">
+                <div class="pay-group-title">CREDIT / DEBIT CARD</div>
+                <div class="card-item" data-method="KartuKredit" data-type="card">
+                    <div class="card-left">
+                        <div class="card-icon">💳</div>
+                        <div>
+                            <div class="card-name">Visa / Mastercard / JCB</div>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="radio-indicator"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONFIRM BUTTON -->
+            <button class="confirm-btn" id="confirmPaymentBtn">
+                <span>Confirm Payment</span>
+                <span class="confirm-amount" id="confirmAmount">Rp 175.000</span>
+            </button>
+
+            <!-- SECURITY FOOTER -->
+            <div class="security-footer">
+                <span>🔒 SECURE SOCKET LAYER</span>
+                <span>💳 PCI DSS LEVEL 1</span>
+                <span>📄 PRIVACY POLICY</span>
+                <span>⚖️ TERMS OF SERVICE</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toastMsg" class="toast-message"></div>
+
+<script>
+    // Variabel untuk menyimpan data booking
+    let bookingData = {
+        asal: "Pekanbaru",
+        tujuan: "Bukittinggi",
+        tanggal: "",
+        kursi: "",
+        harga: 175000,
+        invoiceId: "",
+        waktuBerangkat: "07:30",
+        waktuTiba: "10:45",
+        namaArmada: "Toyota Hiace Executive",
+        kelas: "VIP CLASS"
+    };
+
+    // Selected payment method
+    let selectedMethod = {
+        type: 'ewallet',
+        name: 'OVO'
+    };
+
+    // Fungsi format tanggal ke Bahasa Indonesia
+    function formatTanggal(tanggalISO) {
+        if (!tanggalISO) return "Belum dipilih";
+        try {
+            const date = new Date(tanggalISO);
+            if (isNaN(date.getTime())) return tanggalISO;
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        } catch(e) {
+            return tanggalISO;
+        }
+    }
+
+    // Generate unique booking code
+    function generateBookingCode() {
+        const today = new Date();
+        const tahun = today.getFullYear();
+        const bulan = String(today.getMonth() + 1).padStart(2, '0');
+        const hari = String(today.getDate()).padStart(2, '0');
+        const random = Math.floor(Math.random() * 900) + 100;
+        return `SRG-${tahun}${bulan}${hari}-${random}`;
+    }
+
+    // Load data dari localStorage (dari halaman seats)
+    function loadBookingData() {
+        const savedAsal = localStorage.getItem('travel_asal');
+        const savedTujuan = localStorage.getItem('travel_tujuan');
+        const savedTanggal = localStorage.getItem('travel_tanggal');
+        const savedKursi = localStorage.getItem('travel_kursi');
+        const savedHarga = localStorage.getItem('travel_harga');
+        const savedWaktuBerangkat = localStorage.getItem('travel_waktu_berangkat');
+        const savedWaktuTiba = localStorage.getItem('travel_waktu_tiba');
+        const savedNamaArmada = localStorage.getItem('travel_nama_armada');
+        const savedBookingId = localStorage.getItem('travel_booking_id');
+        const savedKelas = localStorage.getItem('travel_kelas');
+
+        if (savedAsal) bookingData.asal = savedAsal;
+        if (savedTujuan) bookingData.tujuan = savedTujuan;
+        if (savedTanggal) bookingData.tanggal = savedTanggal;
+        if (savedKursi) bookingData.kursi = savedKursi;
+        if (savedHarga) bookingData.harga = parseInt(savedHarga);
+        if (savedWaktuBerangkat) bookingData.waktuBerangkat = savedWaktuBerangkat;
+        if (savedWaktuTiba) bookingData.waktuTiba = savedWaktuTiba;
+        if (savedNamaArmada) bookingData.namaArmada = savedNamaArmada;
+        if (savedKelas) bookingData.kelas = savedKelas;
+        
+        if (savedBookingId) {
+            bookingData.invoiceId = savedBookingId;
+        } else {
+            const today = new Date();
+            const random = Math.floor(Math.random() * 9000) + 1000;
+            bookingData.invoiceId = `#PT-${today.getFullYear()}${String(today.getMonth()+1).padStart(2,'0')}${String(today.getDate()).padStart(2,'0')}-${random}`;
+        }
+
+        updateDisplayData();
+    }
+
+    // Update tampilan invoice
+    function updateDisplayData() {
+        document.getElementById('asalDisplay').innerText = bookingData.asal;
+        document.getElementById('tujuanDisplay').innerText = bookingData.tujuan;
+        document.getElementById('tanggalDisplay').innerHTML = formatTanggal(bookingData.tanggal);
+        document.getElementById('waktuBerangkat').innerHTML = bookingData.waktuBerangkat;
+        document.getElementById('waktuTiba').innerHTML = bookingData.waktuTiba;
+        document.getElementById('kursiDisplay').innerHTML = bookingData.kursi || 'Belum pilih kursi';
+        document.getElementById('armadaDisplay').innerHTML = `${bookingData.namaArmada} | ${bookingData.kelas}`;
+        
+        const formattedHarga = `Rp ${bookingData.harga.toLocaleString('id-ID')}`;
+        document.getElementById('totalHarga').innerHTML = formattedHarga;
+        document.getElementById('confirmAmount').innerHTML = formattedHarga;
+        document.getElementById('invoiceId').innerHTML = bookingData.invoiceId;
+    }
+
+    // Inisialisasi pemilihan metode pembayaran
+    function initPaymentSelection() {
+        const ewalletBtns = document.querySelectorAll('.ewallet-btn');
+        ewalletBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                ewalletBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.card-item').forEach(c => c.classList.remove('active'));
+                selectedMethod = {
+                    type: 'ewallet',
+                    name: btn.getAttribute('data-method')
+                };
+            });
+        });
+        
+        const bankItems = document.querySelectorAll('.bank-item');
+        bankItems.forEach(bank => {
+            bank.addEventListener('click', () => {
+                bankItems.forEach(b => b.classList.remove('active'));
+                bank.classList.add('active');
+                document.querySelectorAll('.ewallet-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.card-item').forEach(c => c.classList.remove('active'));
+                selectedMethod = {
+                    type: 'bank',
+                    name: bank.getAttribute('data-method')
+                };
+            });
+        });
+        
+        const cardItem = document.querySelector('.card-item');
+        if (cardItem) {
+            cardItem.addEventListener('click', () => {
+                document.querySelectorAll('.card-item').forEach(c => c.classList.remove('active'));
+                cardItem.classList.add('active');
+                document.querySelectorAll('.ewallet-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('active'));
+                selectedMethod = {
+                    type: 'card',
+                    name: 'Kartu Kredit/Debit'
+                };
+            });
+        }
+        
+        const defaultEwallet = document.querySelector('.ewallet-btn[data-method="OVO"]');
+        if (defaultEwallet) defaultEwallet.classList.add('active');
+    }
+
+    // Show loading overlay
+    function showLoading() {
+        document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+
+    // Hide loading overlay
+    function hideLoading() {
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    // Show toast notification
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toastMsg');
+        toast.innerHTML = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, duration);
+    }
+
+    // Save all booking data to localStorage for eticket page
+    function saveToLocalStorageForTicket() {
+        localStorage.setItem('travel_asal', bookingData.asal);
+        localStorage.setItem('travel_tujuan', bookingData.tujuan);
+        localStorage.setItem('travel_tanggal', bookingData.tanggal);
+        localStorage.setItem('travel_kursi', bookingData.kursi);
+        localStorage.setItem('travel_harga', bookingData.harga);
+        localStorage.setItem('travel_waktu_berangkat', bookingData.waktuBerangkat);
+        localStorage.setItem('travel_waktu_tiba', bookingData.waktuTiba);
+        localStorage.setItem('travel_nama_armada', bookingData.namaArmada);
+        localStorage.setItem('travel_kelas', bookingData.kelas);
+        
+        const bookingCode = generateBookingCode();
+        localStorage.setItem('travel_booking_code', bookingCode);
+        localStorage.setItem('travel_booking_id', bookingData.invoiceId);
+        localStorage.setItem('payment_status', 'success');
+        localStorage.setItem('payment_method', `${selectedMethod.type.toUpperCase()} - ${selectedMethod.name}`);
+        localStorage.setItem('payment_date', new Date().toISOString());
+    }
+
+    // Handle confirm payment and redirect to eticket
+    function handleConfirmPayment() {
+        if (!bookingData.kursi || bookingData.kursi === "") {
+            showToast('❌ Silakan pilih kursi terlebih dahulu!', 2500);
+            return;
+        }
+        
+        if (!bookingData.tanggal) {
+            showToast('📅 Silakan pilih tanggal perjalanan!', 2500);
+            return;
+        }
+        
+        // Save all data to localStorage
+        saveToLocalStorageForTicket();
+        
+        // Show loading animation
+        showLoading();
+        
+        // Simulate payment processing (1.5 seconds)
+        setTimeout(() => {
+            hideLoading();
+            showToast(`✅ Pembayaran berhasil! Mengalihkan ke E-Ticket...`, 2000);
+            
+            // Redirect to eticket page after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'etiket.html';
+            }, 1500);
+        }, 1500);
+    }
+
+    // Inisialisasi
+    function init() {
+        loadBookingData();
+        initPaymentSelection();
+        
+        const confirmBtn = document.getElementById('confirmPaymentBtn');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', handleConfirmPayment);
+        }
+        
+        if (!bookingData.kursi || bookingData.kursi === "") {
+            console.warn('Tidak ada data kursi, pastikan user memilih kursi dari halaman seats');
+        }
+    }
+    
+    init();
+</script>
+</body>
+</html>
